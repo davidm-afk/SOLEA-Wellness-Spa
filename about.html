@@ -25,6 +25,7 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+    <link href="css/custom-booking.css" rel="stylesheet">
 </head>
 
 <body>
@@ -85,11 +86,10 @@
                         <div class="dropdown-menu rounded-0 m-0" style="background-color: #050505; border: 1px solid rgba(197, 168, 128, 0.15);">
                             <a href="appointment.html" class="dropdown-item" style="color: #d1d1d1;">Citas</a>
                             <a href="opening.html" class="dropdown-item" style="color: #d1d1d1;">Horarios</a>
-                            <a href="team.html" class="dropdown-item" style="color: #d1d1d1;">Especialistas</a>
-                            <a href="testimonial.html" class="dropdown-item" style="color: #d1d1d1;">Testimonios</a>
                         </div>
                     </div>
                     <a href="contact.html" class="nav-item nav-link">Contacto</a>
+                    <a href="#" class="nav-item nav-link nav-item-nua-gold"><i class="far fa-calendar-check mr-1"></i> Mis Reservas <span class="badge badge-primary ml-1" style="display: none;">0</span></a>
                 </div>
                 <a href="appointment.html" class="btn btn-primary d-none d-lg-block" style="border-radius: 50px; padding: 8px 25px;">Reservar</a>
             </div>
@@ -124,16 +124,16 @@
                     <h1 class="mb-4 text-white" style="font-size: 2.5rem;">Tu Mejor Centro de Spa, Belleza y Cuidado de la Piel</h1>
                     <p class="pl-4 border-left border-primary" style="font-size: 0.95rem; line-height: 1.8; font-weight: 300;">En NÜA Wellness Spa, fusionamos la elegancia, la ciencia estética y la calidez humana para crear un espacio de bienestar absoluto. Nuestra filosofía se centra en ofrecer tratamientos altamente personalizados que resalten tu belleza natural y restauren el equilibrio interior, utilizando tecnología de última generación y productos de la más alta gama.</p>
                     <div class="row pt-3">
-                        <div class="col-6">
-                            <div class="text-center p-4" style="background-color: #111111; border: 1px solid rgba(197, 168, 128, 0.12);">
-                                <h3 class="display-4 text-primary" data-toggle="counter-up">15</h3>
-                                <h6 class="text-uppercase text-white-50" style="font-size: 0.8rem; letter-spacing: 1px;">Especialistas</h6>
+                        <div class="col-sm-6 mb-3 mb-sm-0">
+                            <div class="p-4" style="background-color: #111111; border: 1px solid rgba(197, 168, 128, 0.12); height: 100%;">
+                                <h6 class="text-primary text-uppercase mb-2" style="font-size: 0.85rem; letter-spacing: 1px; font-weight: 600;"><i class="fas fa-gem mr-2"></i> Compromiso de Lujo</h6>
+                                <p class="text-white-50 m-0" style="font-size: 0.8rem; font-weight: 300; line-height: 1.6;">Atención boutique de nivel superior con cabinas completamente sanitizadas y aceites 100% orgánicos premium.</p>
                             </div>
                         </div>
-                        <div class="col-6">
-                            <div class="text-center p-4" style="background-color: #111111; border: 1px solid rgba(197, 168, 128, 0.12);">
-                                <h3 class="display-4 text-primary" data-toggle="counter-up">2500</h3>
-                                <h6 class="text-uppercase text-white-50" style="font-size: 0.8rem; letter-spacing: 1px;">Clientes Satisfechos</h6>
+                        <div class="col-sm-6">
+                            <div class="p-4" style="background-color: #111111; border: 1px solid rgba(197, 168, 128, 0.12); height: 100%;">
+                                <h6 class="text-primary text-uppercase mb-2" style="font-size: 0.85rem; letter-spacing: 1px; font-weight: 600;"><i class="fas fa-leaf mr-2"></i> Filosofía de Bienestar</h6>
+                                <p class="text-white-50 m-0" style="font-size: 0.8rem; font-weight: 300; line-height: 1.6;">Tratamientos altamente personalizados diseñados para restaurar tu paz interior y resaltar tu belleza natural.</p>
                             </div>
                         </div>
                     </div>
@@ -258,7 +258,7 @@
                                 <a class="mb-2 text-white-50" href="index.html"><i class="fa fa-angle-right mr-2" style="color: #c5a880;"></i>Inicio</a>
                                 <a class="mb-2 text-white-50" href="about.html"><i class="fa fa-angle-right mr-2" style="color: #c5a880;"></i>Nosotros</a>
                                 <a class="mb-2 text-white-50" href="service.html"><i class="fa fa-angle-right mr-2" style="color: #c5a880;"></i>Nuestros Servicios</a>
-                                <a class="mb-2 text-white-50" href="price.html"><i class="fa fa-angle-right mr-2" style="color: #c5a880;"></i>Planes de Precios</a>
+                                <a class="mb-2 text-white-50" href="price.html"><i class="fa fa-angle-right mr-2" style="color: #c5a880;"></i>Menú de Precios</a>
                                 <a class="text-white-50" href="contact.html"><i class="fa fa-angle-right mr-2" style="color: #c5a880;"></i>Contacto</a>
                             </div>
                         </div>
@@ -323,6 +323,7 @@
     <script src="mail/contact.js"></script>
 
     <!-- Template Javascript -->
+    <script src="js/booking.js"></script>
     <script src="js/main.js"></script>
 </body>
 

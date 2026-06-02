@@ -25,6 +25,7 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+    <link href="css/custom-booking.css" rel="stylesheet">
 </head>
 
 <body>
@@ -85,11 +86,10 @@
                         <div class="dropdown-menu rounded-0 m-0" style="background-color: #050505; border: 1px solid rgba(197, 168, 128, 0.15);">
                             <a href="appointment.html" class="dropdown-item active" style="color: #c5a880;">Citas</a>
                             <a href="opening.html" class="dropdown-item" style="color: #d1d1d1;">Horarios</a>
-                            <a href="team.html" class="dropdown-item" style="color: #d1d1d1;">Especialistas</a>
-                            <a href="testimonial.html" class="dropdown-item" style="color: #d1d1d1;">Testimonios</a>
                         </div>
                     </div>
                     <a href="contact.html" class="nav-item nav-link">Contacto</a>
+                    <a href="#" class="nav-item nav-link nav-item-nua-gold"><i class="far fa-calendar-check mr-1"></i> Mis Reservas <span class="badge badge-primary ml-1" style="display: none;">0</span></a>
                 </div>
                 <a href="appointment.html" class="btn btn-primary d-none d-lg-block" style="border-radius: 50px; padding: 8px 25px;">Reservar</a>
             </div>
@@ -118,16 +118,16 @@
             <div class="col-lg-6 py-5">
                 <div class="p-5 my-5" style="background: rgba(5, 5, 5, 0.85); border: 1px solid rgba(197, 168, 128, 0.15); box-shadow: 0 15px 40px rgba(0,0,0,0.6);">
                     <h1 class="text-white text-center mb-4" style="font-family: 'Cormorant Garamond', serif; color: #c5a880 !important; font-weight: 500;">Agendar Cita</h1>
-                    <form>
+                    <form class="nua-booking-form">
                         <div class="form-row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <input type="text" class="form-control bg-transparent p-4" placeholder="Tu Nombre" required="required" />
+                                    <input type="text" class="form-control bg-transparent p-4 nua-name" placeholder="Tu Nombre" required="required" />
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <input type="email" class="form-control bg-transparent p-4" placeholder="Tu Correo Electrónico" required="required" />
+                                    <input type="email" class="form-control bg-transparent p-4 nua-email" placeholder="Tu Correo Electrónico" required="required" />
                                 </div>
                             </div>
                         </div>
@@ -135,14 +135,14 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <div class="date" id="date" data-target-input="nearest">
-                                        <input type="text" class="form-control bg-transparent p-4 datetimepicker-input" placeholder="Seleccionar Fecha" data-target="#date" data-toggle="datetimepicker"/>
+                                        <input type="text" class="form-control bg-transparent p-4 datetimepicker-input nua-date" placeholder="Seleccionar Fecha" data-target="#date" data-toggle="datetimepicker"/>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <div class="time" id="time" data-target-input="nearest">
-                                        <input type="text" class="form-control bg-transparent p-4 datetimepicker-input" placeholder="Seleccionar Hora" data-target="#time" data-toggle="datetimepicker"/>
+                                        <input type="text" class="form-control bg-transparent p-4 datetimepicker-input nua-time" placeholder="Seleccionar Hora" data-target="#time" data-toggle="datetimepicker"/>
                                     </div>
                                 </div>
                             </div>
@@ -150,12 +150,19 @@
                         <div class="form-row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <select class="custom-select bg-transparent px-4" style="height: 47px;">
-                                        <option selected>Selecciona un Servicio</option>
-                                        <option value="1">Masajes Esenciales</option>
-                                        <option value="2">Tratamientos Faciales Avanzados</option>
-                                        <option value="3">Cuidado Corporal y Aseo</option>
-                                        <option value="4">Paquetes de Lujo</option>
+                                    <select class="custom-select bg-transparent px-4 nua-service" style="height: 47px;">
+                                        <option value="" selected>Selecciona un Servicio</option>
+                                        <option value="Essential">Experiencia Essential (60 min — $700 MXN)</option>
+                                        <option value="Signature">Experiencia Signature (90 min — $1,200 MXN)</option>
+                                        <option value="HardRelax">Experiencia Hard Relax (60 min — $900 MXN)</option>
+                                        <option value="HeadFace">Experiencia Head.Face (40 min — $500 MXN)</option>
+                                        <option value="Reset">Experiencia Reset (60 min — $700 MXN)</option>
+                                        <option value="BackSkin">Back Skin Detox (40 min — $700 MXN)</option>
+                                        <option value="BodyGrooming">Body Grooming (40 min — $600 MXN)</option>
+                                        <option value="IntimateGrooming">Intimate Grooming (60 min — $1,200 MXN)</option>
+                                        <option value="OfficeReset">Ritual Office Reset (70 min — $850 MXN)</option>
+                                        <option value="RitualRecovery">Ritual Recovery (90 min — $1,350 MXN)</option>
+                                        <option value="RitualFullReset">Ritual Full Reset (130 min — $1,800 MXN)</option>
                                     </select>
                                 </div>
                             </div>
@@ -229,7 +236,7 @@
                                 <a class="mb-2 text-white-50" href="index.html"><i class="fa fa-angle-right mr-2" style="color: #c5a880;"></i>Inicio</a>
                                 <a class="mb-2 text-white-50" href="about.html"><i class="fa fa-angle-right mr-2" style="color: #c5a880;"></i>Nosotros</a>
                                 <a class="mb-2 text-white-50" href="service.html"><i class="fa fa-angle-right mr-2" style="color: #c5a880;"></i>Nuestros Servicios</a>
-                                <a class="mb-2 text-white-50" href="price.html"><i class="fa fa-angle-right mr-2" style="color: #c5a880;"></i>Planes de Precios</a>
+                                <a class="mb-2 text-white-50" href="price.html"><i class="fa fa-angle-right mr-2" style="color: #c5a880;"></i>Menú de Precios</a>
                                 <a class="text-white-50" href="contact.html"><i class="fa fa-angle-right mr-2" style="color: #c5a880;"></i>Contacto</a>
                             </div>
                         </div>
@@ -294,6 +301,7 @@
     <script src="mail/contact.js"></script>
 
     <!-- Template Javascript -->
+    <script src="js/booking.js"></script>
     <script src="js/main.js"></script>
 </body>
 

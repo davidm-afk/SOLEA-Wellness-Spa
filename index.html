@@ -25,6 +25,7 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+    <link href="css/custom-booking.css" rel="stylesheet">
 </head>
 
 <body>
@@ -85,11 +86,10 @@
                         <div class="dropdown-menu rounded-0 m-0" style="background-color: #050505; border: 1px solid rgba(197, 168, 128, 0.15);">
                             <a href="appointment.html" class="dropdown-item" style="color: #d1d1d1;">Citas</a>
                             <a href="opening.html" class="dropdown-item" style="color: #d1d1d1;">Horarios</a>
-                            <a href="team.html" class="dropdown-item" style="color: #d1d1d1;">Especialistas</a>
-                            <a href="testimonial.html" class="dropdown-item" style="color: #d1d1d1;">Testimonios</a>
                         </div>
                     </div>
                     <a href="contact.html" class="nav-item nav-link">Contacto</a>
+                    <a href="#" class="nav-item nav-link nav-item-nua-gold"><i class="far fa-calendar-check mr-1"></i> Mis Reservas <span class="badge badge-primary ml-1" style="display: none;">0</span></a>
                 </div>
                 <a href="appointment.html" class="btn btn-primary d-none d-lg-block" style="border-radius: 50px; padding: 8px 25px;">Reservar</a>
             </div>
@@ -158,16 +158,16 @@
                     <h1 class="mb-4 text-white" style="font-size: 2.5rem;">Tu Mejor Centro de Spa, Belleza y Cuidado de la Piel</h1>
                     <p class="pl-4 border-left border-primary" style="font-size: 0.95rem; line-height: 1.8; font-weight: 300;">En NÜA Wellness Spa, fusionamos la elegancia, la ciencia estética y la calidez humana para crear un espacio de bienestar absoluto. Nuestra filosofía se centra en ofrecer tratamientos altamente personalizados que resalten tu belleza natural y restauren el equilibrio interior, utilizando tecnología de última generación y productos de la más alta gama.</p>
                     <div class="row pt-3">
-                        <div class="col-6">
-                            <div class="text-center p-4" style="background-color: #111111; border: 1px solid rgba(197, 168, 128, 0.12);">
-                                <h3 class="display-4 text-primary" data-toggle="counter-up">15</h3>
-                                <h6 class="text-uppercase text-white-50" style="font-size: 0.8rem; letter-spacing: 1px;">Especialistas</h6>
+                        <div class="col-sm-6 mb-3 mb-sm-0">
+                            <div class="p-4" style="background-color: #111111; border: 1px solid rgba(197, 168, 128, 0.12); height: 100%;">
+                                <h6 class="text-primary text-uppercase mb-2" style="font-size: 0.85rem; letter-spacing: 1px; font-weight: 600;"><i class="fas fa-gem mr-2"></i> Compromiso de Lujo</h6>
+                                <p class="text-white-50 m-0" style="font-size: 0.8rem; font-weight: 300; line-height: 1.6;">Atención boutique de nivel superior con cabinas completamente sanitizadas y aceites 100% orgánicos premium.</p>
                             </div>
                         </div>
-                        <div class="col-6">
-                            <div class="text-center p-4" style="background-color: #111111; border: 1px solid rgba(197, 168, 128, 0.12);">
-                                <h3 class="display-4 text-primary" data-toggle="counter-up">2500</h3>
-                                <h6 class="text-uppercase text-white-50" style="font-size: 0.8rem; letter-spacing: 1px;">Clientes Satisfechos</h6>
+                        <div class="col-sm-6">
+                            <div class="p-4" style="background-color: #111111; border: 1px solid rgba(197, 168, 128, 0.12); height: 100%;">
+                                <h6 class="text-primary text-uppercase mb-2" style="font-size: 0.85rem; letter-spacing: 1px; font-weight: 600;"><i class="fas fa-leaf mr-2"></i> Filosofía de Bienestar</h6>
+                                <p class="text-white-50 m-0" style="font-size: 0.8rem; font-weight: 300; line-height: 1.6;">Tratamientos altamente personalizados diseñados para restaurar tu paz interior y resaltar tu belleza natural.</p>
                             </div>
                         </div>
                     </div>
@@ -231,16 +231,16 @@
             <div class="col-lg-6 py-5">
                 <div class="p-5 my-5" style="background: rgba(5, 5, 5, 0.85); border: 1px solid rgba(197, 168, 128, 0.15); box-shadow: 0 15px 40px rgba(0,0,0,0.6);">
                     <h1 class="text-white text-center mb-4" style="font-family: 'Cormorant Garamond', serif; color: #c5a880 !important; font-weight: 500;">Agendar Cita</h1>
-                    <form>
+                    <form class="nua-booking-form">
                         <div class="form-row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <input type="text" class="form-control bg-transparent p-4" placeholder="Tu Nombre" required="required" />
+                                    <input type="text" class="form-control bg-transparent p-4 nua-name" placeholder="Tu Nombre" required="required" />
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <input type="email" class="form-control bg-transparent p-4" placeholder="Tu Correo Electrónico" required="required" />
+                                    <input type="email" class="form-control bg-transparent p-4 nua-email" placeholder="Tu Correo Electrónico" required="required" />
                                 </div>
                             </div>
                         </div>
@@ -248,14 +248,14 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <div class="date" id="date" data-target-input="nearest">
-                                        <input type="text" class="form-control bg-transparent p-4 datetimepicker-input" placeholder="Seleccionar Fecha" data-target="#date" data-toggle="datetimepicker"/>
+                                        <input type="text" class="form-control bg-transparent p-4 datetimepicker-input nua-date" placeholder="Seleccionar Fecha" data-target="#date" data-toggle="datetimepicker"/>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <div class="time" id="time" data-target-input="nearest">
-                                        <input type="text" class="form-control bg-transparent p-4 datetimepicker-input" placeholder="Seleccionar Hora" data-target="#time" data-toggle="datetimepicker"/>
+                                        <input type="text" class="form-control bg-transparent p-4 datetimepicker-input nua-time" placeholder="Seleccionar Hora" data-target="#time" data-toggle="datetimepicker"/>
                                     </div>
                                 </div>
                             </div>
@@ -263,12 +263,19 @@
                         <div class="form-row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <select class="custom-select bg-transparent px-4" style="height: 47px;">
-                                        <option selected>Selecciona un Servicio</option>
-                                        <option value="1">Masajes Esenciales</option>
-                                        <option value="2">Tratamientos Faciales Avanzados</option>
-                                        <option value="3">Cuidado Corporal y Aseo</option>
-                                        <option value="4">Paquetes de Lujo</option>
+                                    <select class="custom-select bg-transparent px-4 nua-service" style="height: 47px;">
+                                        <option value="" selected>Selecciona un Servicio</option>
+                                        <option value="Essential">Experiencia Essential (60 min — $700 MXN)</option>
+                                        <option value="Signature">Experiencia Signature (90 min — $1,200 MXN)</option>
+                                        <option value="HardRelax">Experiencia Hard Relax (60 min — $900 MXN)</option>
+                                        <option value="HeadFace">Experiencia Head.Face (40 min — $500 MXN)</option>
+                                        <option value="Reset">Experiencia Reset (60 min — $700 MXN)</option>
+                                        <option value="BackSkin">Back Skin Detox (40 min — $700 MXN)</option>
+                                        <option value="BodyGrooming">Body Grooming (40 min — $600 MXN)</option>
+                                        <option value="IntimateGrooming">Intimate Grooming (60 min — $1,200 MXN)</option>
+                                        <option value="OfficeReset">Ritual Office Reset (70 min — $850 MXN)</option>
+                                        <option value="RitualRecovery">Ritual Recovery (90 min — $1,350 MXN)</option>
+                                        <option value="RitualFullReset">Ritual Full Reset (130 min — $1,800 MXN)</option>
                                     </select>
                                 </div>
                             </div>
@@ -323,53 +330,58 @@
                 </div>
                 <div class="col-lg-7 pt-5 pb-lg-5">
                     <div class="pricing-text bg-light p-4 p-lg-5 my-lg-5" style="border: 1px solid rgba(197, 168, 128, 0.12); box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+                        <h6 class="d-inline-block text-white text-uppercase bg-primary py-1 px-2 mb-3" style="border: 1px solid rgba(197, 168, 128, 0.2); font-size: 0.8rem;">Recomendados</h6>
+                        <h2 class="text-white mb-4" style="font-family: 'Cormorant Garamond', serif; font-size: 2rem;">Experiencias Destacadas</h2>
                         <div class="owl-carousel pricing-carousel">
+                            <!-- Experience 1 -->
                             <div class="bg-white" style="background-color: #111111 !important; border: 1px solid rgba(197, 168, 128, 0.15);">
                                 <div class="d-flex align-items-center justify-content-between border-bottom border-primary p-4">
-                                    <h1 class="display-4 mb-0 text-white" style="font-family: 'Poppins', sans-serif;">
-                                        <small class="align-top text-primary font-weight-medium" style="font-size: 22px; line-height: 45px;">$</small>49<small class="align-bottom text-white-50 font-weight-medium" style="font-size: 16px; line-height: 40px;">/Mes</small>
+                                    <h1 class="display-4 mb-0 text-white" style="font-family: 'Poppins', sans-serif; font-size: 2.2rem;">
+                                        <small class="align-top text-primary font-weight-medium" style="font-size: 20px; line-height: 35px;">$</small>1,200<small class="align-bottom text-white-50 font-weight-medium" style="font-size: 14px; line-height: 30px;"> MXN</small>
                                     </h1>
-                                    <h5 class="text-primary text-uppercase m-0">Plan Básico</h5>
+                                    <h5 class="text-primary text-uppercase m-0" style="font-size: 0.9rem;">Signature</h5>
                                 </div>
-                                <div class="p-4" style="color: #b0b0b0; font-weight: 300;">
-                                    <p><i class="fa fa-check text-success mr-2"></i>Masaje Corporal Completo</p>
-                                    <p><i class="fa fa-check text-success mr-2"></i>Masaje de Tejido Profundo</p>
-                                    <p><i class="fa fa-check text-success mr-2"></i>Masaje con Piedras Calientes</p>
-                                    <p><i class="fa fa-check text-success-50 mr-2" style="opacity: 0.3;"></i>Exfoliación Corporal</p>
-                                    <p><i class="fa fa-check text-success-50 mr-2" style="opacity: 0.3;"></i>Cuidado de Manos y Pies</p>
-                                    <a href="appointment.html" class="btn btn-primary my-2" style="border-radius: 50px;">Comprar Ahora</a>
+                                <div class="p-4" style="color: #b0b0b0; font-weight: 300; font-size: 0.9rem;">
+                                    <p class="text-primary font-weight-medium mb-3" style="font-size: 0.8rem; letter-spacing: 1px;"><i class="far fa-clock mr-1"></i> Duración: 90 Minutos</p>
+                                    <p><i class="fa fa-check text-primary mr-2" style="font-size: 0.8rem;"></i>Masaje Relajante Premium</p>
+                                    <p><i class="fa fa-check text-primary mr-2" style="font-size: 0.8rem;"></i>Reflexología Podal</p>
+                                    <p><i class="fa fa-check text-primary mr-2" style="font-size: 0.8rem;"></i>Aromaterapia de Autor</p>
+                                    <p><i class="fa fa-check text-primary mr-2" style="font-size: 0.8rem;"></i>Copa de Vino de Cortesía</p>
+                                    <a href="appointment.html?service=Signature" class="btn btn-primary my-2 btn-block" style="border-radius: 50px; font-size: 0.8rem; letter-spacing: 1px;">Reservar Experiencia</a>
                                 </div>
                             </div>
+                            <!-- Experience 2 -->
                             <div class="bg-white" style="background-color: #111111 !important; border: 1px solid rgba(197, 168, 128, 0.15);">
                                 <div class="d-flex align-items-center justify-content-between border-bottom border-primary p-4">
-                                    <h1 class="display-4 mb-0 text-white" style="font-family: 'Poppins', sans-serif;">
-                                        <small class="align-top text-primary font-weight-medium" style="font-size: 22px; line-height: 45px;">$</small>99<small class="align-bottom text-white-50 font-weight-medium" style="font-size: 16px; line-height: 40px;">/Mes</small>
+                                    <h1 class="display-4 mb-0 text-white" style="font-family: 'Poppins', sans-serif; font-size: 2.2rem;">
+                                        <small class="align-top text-primary font-weight-medium" style="font-size: 20px; line-height: 35px;">$</small>1,350<small class="align-bottom text-white-50 font-weight-medium" style="font-size: 14px; line-height: 30px;"> MXN</small>
                                     </h1>
-                                    <h5 class="text-primary text-uppercase m-0">Plan Familiar</h5>
+                                    <h5 class="text-primary text-uppercase m-0" style="font-size: 0.9rem;">Recovery</h5>
                                 </div>
-                                <div class="p-4" style="color: #b0b0b0; font-weight: 300;">
-                                    <p><i class="fa fa-check text-success mr-2"></i>Masaje Corporal Completo</p>
-                                    <p><i class="fa fa-check text-success mr-2"></i>Masaje de Tejido Profundo</p>
-                                    <p><i class="fa fa-check text-success mr-2"></i>Masaje con Piedras Calientes</p>
-                                    <p><i class="fa fa-check text-success mr-2"></i>Exfoliación Corporal</p>
-                                    <p><i class="fa fa-check text-success-50 mr-2" style="opacity: 0.3;"></i>Cuidado de Manos y Pies</p>
-                                    <a href="appointment.html" class="btn btn-primary my-2" style="border-radius: 50px;">Comprar Ahora</a>
+                                <div class="p-4" style="color: #b0b0b0; font-weight: 300; font-size: 0.9rem;">
+                                    <p class="text-primary font-weight-medium mb-3" style="font-size: 0.8rem; letter-spacing: 1px;"><i class="far fa-clock mr-1"></i> Duración: 90 Minutos</p>
+                                    <p><i class="fa fa-check text-primary mr-2" style="font-size: 0.8rem;"></i>Masaje Descontracturante Profundo</p>
+                                    <p><i class="fa fa-check text-primary mr-2" style="font-size: 0.8rem;"></i>Masaje Craneofacial Relajante</p>
+                                    <p><i class="fa fa-check text-primary mr-2" style="font-size: 0.8rem;"></i>Restauración Muscular Integral</p>
+                                    <p><i class="fa fa-check text-primary mr-2" style="font-size: 0.8rem;"></i>Copa de Vino & Chocolates</p>
+                                    <a href="appointment.html?service=RitualRecovery" class="btn btn-primary my-2 btn-block" style="border-radius: 50px; font-size: 0.8rem; letter-spacing: 1px;">Reservar Experiencia</a>
                                 </div>
                             </div>
+                            <!-- Experience 3 -->
                             <div class="bg-white" style="background-color: #111111 !important; border: 1px solid rgba(197, 168, 128, 0.15);">
                                 <div class="d-flex align-items-center justify-content-between border-bottom border-primary p-4">
-                                    <h1 class="display-4 mb-0 text-white" style="font-family: 'Poppins', sans-serif;">
-                                        <small class="align-top text-primary font-weight-medium" style="font-size: 22px; line-height: 45px;">$</small>149<small class="align-bottom text-white-50 font-weight-medium" style="font-size: 16px; line-height: 40px;">/Mes</small>
+                                    <h1 class="display-4 mb-0 text-white" style="font-family: 'Poppins', sans-serif; font-size: 2.2rem;">
+                                        <small class="align-top text-primary font-weight-medium" style="font-size: 20px; line-height: 35px;">$</small>1,800<small class="align-bottom text-white-50 font-weight-medium" style="font-size: 14px; line-height: 30px;"> MXN</small>
                                     </h1>
-                                    <h5 class="text-primary text-uppercase m-0">Plan VIP</h5>
+                                    <h5 class="text-primary text-uppercase m-0" style="font-size: 0.9rem;">Full Reset</h5>
                                 </div>
-                                <div class="p-4" style="color: #b0b0b0; font-weight: 300;">
-                                    <p><i class="fa fa-check text-success mr-2"></i>Masaje Corporal Completo</p>
-                                    <p><i class="fa fa-check text-success mr-2"></i>Masaje de Tejido Profundo</p>
-                                    <p><i class="fa fa-check text-success mr-2"></i>Masaje con Piedras Calientes</p>
-                                    <p><i class="fa fa-check text-success mr-2"></i>Exfoliación Corporal</p>
-                                    <p><i class="fa fa-check text-success mr-2"></i>Cuidado de Manos y Pies</p>
-                                    <a href="appointment.html" class="btn btn-primary my-2" style="border-radius: 50px;">Comprar Ahora</a>
+                                <div class="p-4" style="color: #b0b0b0; font-weight: 300; font-size: 0.9rem;">
+                                    <p class="text-primary font-weight-medium mb-3" style="font-size: 0.8rem; letter-spacing: 1px;"><i class="far fa-clock mr-1"></i> Duración: 130 Minutos</p>
+                                    <p><i class="fa fa-check text-primary mr-2" style="font-size: 0.8rem;"></i>Masaje de Cuerpo Completo Premium</p>
+                                    <p><i class="fa fa-check text-primary mr-2" style="font-size: 0.8rem;"></i>Masaje Cráneo Facial Relajante</p>
+                                    <p><i class="fa fa-check text-primary mr-2" style="font-size: 0.8rem;"></i>Tratamiento Back Skin Detox</p>
+                                    <p><i class="fa fa-check text-primary mr-2" style="font-size: 0.8rem;"></i>Copa de Vino & Chocolates Finos</p>
+                                    <a href="appointment.html?service=RitualFullReset" class="btn btn-primary my-2 btn-block" style="border-radius: 50px; font-size: 0.8rem; letter-spacing: 1px;">Reservar Experiencia</a>
                                 </div>
                             </div>
                         </div>
@@ -379,142 +391,6 @@
         </div>
     </div>
     <!-- Pricing End -->
-
-
-    <!-- Team Start -->
-    <div class="container-fluid py-5" style="background-color: #050505;">
-        <div class="container pt-5">
-            <div class="row justify-content-center text-center">
-                <div class="col-lg-6">
-                    <h6 class="d-inline-block bg-light text-primary text-uppercase py-1 px-2" style="border: 1px solid rgba(197, 168, 128, 0.2);">Especialistas</h6>
-                    <h1 class="mb-5 text-white" style="font-size: 2.5rem;">Expertos en Estética & Bienestar</h1>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-3 col-md-6">
-                    <div class="team position-relative overflow-hidden mb-5" style="border: 1px solid rgba(197, 168, 128, 0.12); box-shadow: 0 5px 15px rgba(0,0,0,0.5);">
-                        <img class="img-fluid" src="img/team-1.jpg" alt="">
-                        <div class="position-relative text-center">
-                            <div class="team-text bg-primary text-white" style="background-color: #111111 !important; border-top: 1px solid rgba(197, 168, 128, 0.12);">
-                                <h5 class="text-primary text-uppercase" style="font-size: 1.1rem; font-weight: 600;">Olivia Mia</h5>
-                                <p class="m-0 text-white-50" style="font-size: 0.85rem; font-weight: 300;">Especialista en Belleza y Spa</p>
-                            </div>
-                            <div class="team-social bg-dark text-center" style="background-color: #050505 !important;">
-                                <a class="btn btn-outline-primary btn-square mr-2" href="#"><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-outline-primary btn-square mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-outline-primary btn-square mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
-                                <a class="btn btn-outline-primary btn-square" href="#"><i class="fab fa-instagram"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="team position-relative overflow-hidden mb-5" style="border: 1px solid rgba(197, 168, 128, 0.12); box-shadow: 0 5px 15px rgba(0,0,0,0.5);">
-                        <img class="img-fluid" src="img/team-2.jpg" alt="">
-                        <div class="position-relative text-center">
-                            <div class="team-text bg-primary text-white" style="background-color: #111111 !important; border-top: 1px solid rgba(197, 168, 128, 0.12);">
-                                <h5 class="text-primary text-uppercase" style="font-size: 1.1rem; font-weight: 600;">Cory Brown</h5>
-                                <p class="m-0 text-white-50" style="font-size: 0.85rem; font-weight: 300;">Terapeuta de Masaje de Lujo</p>
-                            </div>
-                            <div class="team-social bg-dark text-center" style="background-color: #050505 !important;">
-                                <a class="btn btn-outline-primary btn-square mr-2" href="#"><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-outline-primary btn-square mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-outline-primary btn-square mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
-                                <a class="btn btn-outline-primary btn-square" href="#"><i class="fab fa-instagram"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="team position-relative overflow-hidden mb-5" style="border: 1px solid rgba(197, 168, 128, 0.12); box-shadow: 0 5px 15px rgba(0,0,0,0.5);">
-                        <img class="img-fluid" src="img/team-3.jpg" alt="">
-                        <div class="position-relative text-center">
-                            <div class="team-text bg-primary text-white" style="background-color: #111111 !important; border-top: 1px solid rgba(197, 168, 128, 0.12);">
-                                <h5 class="text-primary text-uppercase" style="font-size: 1.1rem; font-weight: 600;">Elizabeth Ross</h5>
-                                <p class="m-0 text-white-50" style="font-size: 0.85rem; font-weight: 300;">Especialista en Cuidado Facial</p>
-                            </div>
-                            <div class="team-social bg-dark text-center" style="background-color: #050505 !important;">
-                                <a class="btn btn-outline-primary btn-square mr-2" href="#"><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-outline-primary btn-square mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-outline-primary btn-square mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
-                                <a class="btn btn-outline-primary btn-square" href="#"><i class="fab fa-instagram"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="team position-relative overflow-hidden mb-5" style="border: 1px solid rgba(197, 168, 128, 0.12); box-shadow: 0 5px 15px rgba(0,0,0,0.5);">
-                        <img class="img-fluid" src="img/team-4.jpg" alt="">
-                        <div class="position-relative text-center">
-                            <div class="team-text bg-primary text-white" style="background-color: #111111 !important; border-top: 1px solid rgba(197, 168, 128, 0.12);">
-                                <h5 class="text-primary text-uppercase" style="font-size: 1.1rem; font-weight: 600;">Kelly Walke</h5>
-                                <p class="m-0 text-white-50" style="font-size: 0.85rem; font-weight: 300;">Asesora de Estética Holística</p>
-                            </div>
-                            <div class="team-social bg-dark text-center" style="background-color: #050505 !important;">
-                                <a class="btn btn-outline-primary btn-square mr-2" href="#"><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-outline-primary btn-square mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-outline-primary btn-square mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
-                                <a class="btn btn-outline-primary btn-square" href="#"><i class="fab fa-instagram"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Team End -->
-
-
-    <!-- Testimonial Start -->
-    <div class="container-fluid py-5" style="background-color: #050505;">
-        <div class="container py-5">
-            <div class="row align-items-center">
-                <div class="col-lg-6 pb-5 pb-lg-0">
-                    <img class="img-fluid w-100" src="img/testimonial.jpg" alt="" style="border: 1px solid rgba(197, 168, 128, 0.15); box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
-                </div>
-                <div class="col-lg-6">
-                    <h6 class="d-inline-block text-primary text-uppercase bg-light py-1 px-2" style="border: 1px solid rgba(197, 168, 128, 0.2);">Testimonios</h6>
-                    <h1 class="mb-4 text-white" style="font-size: 2.5rem;">Opiniones de Clientes Exclusivos</h1>
-                    <div class="owl-carousel testimonial-carousel">
-                        <div class="position-relative">
-                            <i class="fa fa-3x fa-quote-right text-primary position-absolute" style="top: -6px; right: 0; opacity: 0.3;"></i>
-                            <div class="d-flex align-items-center mb-3">
-                                <img class="img-fluid rounded-circle" src="img/testimonial-1.jpg" style="width: 60px; height: 60px;" alt="">
-                                <div class="ml-3">
-                                    <h6 class="text-uppercase text-white m-0" style="font-size: 0.95rem; font-weight: 600;">Valeria Montes</h6>
-                                    <span class="text-primary" style="font-size: 0.8rem;">Empresaria</span>
-                                </div>
-                            </div>
-                            <p class="m-0 text-white-50" style="font-weight: 300; line-height: 1.7;">"La experiencia en NÜA Wellness Spa es simplemente espectacular. Las cabinas oscuras iluminadas con velas crean un ambiente de paz insuperable. El masaje de piedras calientes es el mejor que he recibido en mi vida."</p>
-                        </div>
-                        <div class="position-relative">
-                            <i class="fa fa-3x fa-quote-right text-primary position-absolute" style="top: -6px; right: 0; opacity: 0.3;"></i>
-                            <div class="d-flex align-items-center mb-3">
-                                <img class="img-fluid rounded-circle" src="img/testimonial-2.jpg" style="width: 60px; height: 60px;" alt="">
-                                <div class="ml-3">
-                                    <h6 class="text-uppercase text-white m-0" style="font-size: 0.95rem; font-weight: 600;">Alejandro Ruiz</h6>
-                                    <span class="text-primary" style="font-size: 0.8rem;">Diseñador de Interiores</span>
-                                </div>
-                            </div>
-                            <p class="m-0 text-white-50" style="font-weight: 300; line-height: 1.7;">"El diseño y la ambientación en dorado y negro reflejan perfectamente el lujo de los tratamientos. Las terapeutas tienen una técnica exquisita y los productos utilizados son de una calidad excepcional."</p>
-                        </div>
-                        <div class="position-relative">
-                            <i class="fa fa-3x fa-quote-right text-primary position-absolute" style="top: -6px; right: 0; opacity: 0.3;"></i>
-                            <div class="d-flex align-items-center mb-3">
-                                <img class="img-fluid rounded-circle" src="img/testimonial-3.jpg" style="width: 60px; height: 60px;" alt="">
-                                <div class="ml-3">
-                                    <h6 class="text-uppercase text-white m-0" style="font-size: 0.95rem; font-weight: 600;">Isabella Cardona</h6>
-                                    <span class="text-primary" style="font-size: 0.8rem;">Modelo</span>
-                                </div>
-                            </div>
-                            <p class="m-0 text-white-50" style="font-weight: 300; line-height: 1.7;">"Mis tratamientos faciales mensuales en NÜA son sagrados. El personal es sumamente profesional y el nivel de cuidado al detalle es inigualable. Recomiendo ampliamente el Plan VIP."</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Testimonial End -->
 
 
     <!-- Footer Start -->
@@ -547,7 +423,7 @@
                                 <a class="mb-2 text-white-50" href="index.html"><i class="fa fa-angle-right mr-2" style="color: #c5a880;"></i>Inicio</a>
                                 <a class="mb-2 text-white-50" href="about.html"><i class="fa fa-angle-right mr-2" style="color: #c5a880;"></i>Nosotros</a>
                                 <a class="mb-2 text-white-50" href="service.html"><i class="fa fa-angle-right mr-2" style="color: #c5a880;"></i>Nuestros Servicios</a>
-                                <a class="mb-2 text-white-50" href="price.html"><i class="fa fa-angle-right mr-2" style="color: #c5a880;"></i>Planes de Precios</a>
+                                <a class="mb-2 text-white-50" href="price.html"><i class="fa fa-angle-right mr-2" style="color: #c5a880;"></i>Menú de Precios</a>
                                 <a class="text-white-50" href="contact.html"><i class="fa fa-angle-right mr-2" style="color: #c5a880;"></i>Contacto</a>
                             </div>
                         </div>
@@ -612,6 +488,7 @@
     <script src="mail/contact.js"></script>
 
     <!-- Template Javascript -->
+    <script src="js/booking.js"></script>
     <script src="js/main.js"></script>
 </body>
 

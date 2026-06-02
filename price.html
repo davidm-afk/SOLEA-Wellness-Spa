@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <title>Precios - NÜA Wellness Spa</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="NÜA Wellness Spa, precios spa, planes mensuales, plan vip spa, masajes precios" name="keywords">
-    <meta content="Nuestros planes de precios y paquetes mensuales exclusivos en NÜA Wellness Spa. Encuentra la opción perfecta para tu cuidado personal habitual." name="description">
+    <meta content="NÜA Wellness Spa, precios spa, menú wellness premium, rituales de lujo, experiencias bienestar, masajes precios" name="keywords">
+    <meta content="Descubre el Menú Premium Wellness de NÜA Wellness Spa. Experiencias, rituales y tratamientos de lujo diseñados para reconectar tu cuerpo y mente." name="description">
 
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
@@ -25,6 +25,7 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+    <link href="css/custom-booking.css" rel="stylesheet">
 </head>
 
 <body>
@@ -85,11 +86,10 @@
                         <div class="dropdown-menu rounded-0 m-0" style="background-color: #050505; border: 1px solid rgba(197, 168, 128, 0.15);">
                             <a href="appointment.html" class="dropdown-item" style="color: #d1d1d1;">Citas</a>
                             <a href="opening.html" class="dropdown-item" style="color: #d1d1d1;">Horarios</a>
-                            <a href="team.html" class="dropdown-item" style="color: #d1d1d1;">Especialistas</a>
-                            <a href="testimonial.html" class="dropdown-item" style="color: #d1d1d1;">Testimonios</a>
                         </div>
                     </div>
                     <a href="contact.html" class="nav-item nav-link">Contacto</a>
+                    <a href="#" class="nav-item nav-link nav-item-nua-gold"><i class="far fa-calendar-check mr-1"></i> Mis Reservas <span class="badge badge-primary ml-1" style="display: none;">0</span></a>
                 </div>
                 <a href="appointment.html" class="btn btn-primary d-none d-lg-block" style="border-radius: 50px; padding: 8px 25px;">Reservar</a>
             </div>
@@ -112,73 +112,197 @@
     <!-- Header End -->
 
 
-    <!-- Pricing Start -->
-    <div class="container-fluid bg-pricing" style="margin: 90px 0;">
-        <div class="container">
+    <!-- Menu Start -->
+    <div class="container-fluid py-5" style="background-color: #050505;">
+        <div class="container py-5">
+            <div class="text-center mb-5">
+                <h6 class="d-inline-block text-primary text-uppercase bg-light py-1 px-2" style="border: 1px solid rgba(197, 168, 128, 0.2);">Experiencias Exclusivas</h6>
+                <h1 class="text-white display-4" style="font-family: 'Cormorant Garamond', serif; color: #c5a880 !important; font-weight: 500;">Nuestro Menú Premium</h1>
+                <p class="text-white-50" style="font-weight: 300;">Servicio profesional, higiénico y completamente personalizado.</p>
+            </div>
+            
             <div class="row">
-                <div class="col-lg-5" style="min-height: 500px;">
-                    <div class="position-relative h-100">
-                        <img class="position-absolute w-100 h-100" src="img/pricing.jpg" style="object-fit: cover; border: 1px solid rgba(197, 168, 128, 0.15);">
-                    </div>
-                </div>
-                <div class="col-lg-7 pt-5 pb-lg-5">
-                    <div class="pricing-text bg-light p-4 p-lg-5 my-lg-5" style="border: 1px solid rgba(197, 168, 128, 0.12); box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
-                        <div class="owl-carousel pricing-carousel">
-                            <div class="bg-white" style="background-color: #111111 !important; border: 1px solid rgba(197, 168, 128, 0.15);">
-                                <div class="d-flex align-items-center justify-content-between border-bottom border-primary p-4">
-                                    <h1 class="display-4 mb-0 text-white" style="font-family: 'Poppins', sans-serif;">
-                                        <small class="align-top text-primary font-weight-medium" style="font-size: 22px; line-height: 45px;">$</small>49<small class="align-bottom text-white-50 font-weight-medium" style="font-size: 16px; line-height: 40px;">/Mes</small>
-                                    </h1>
-                                    <h5 class="text-primary text-uppercase m-0">Plan Básico</h5>
-                                </div>
-                                <div class="p-4" style="color: #b0b0b0; font-weight: 300;">
-                                    <p><i class="fa fa-check text-success mr-2"></i>Masaje Corporal Completo</p>
-                                    <p><i class="fa fa-check text-success mr-2"></i>Masaje de Tejido Profundo</p>
-                                    <p><i class="fa fa-check text-success mr-2"></i>Masaje con Piedras Calientes</p>
-                                    <p><i class="fa fa-check text-success-50 mr-2" style="opacity: 0.3;"></i>Exfoliación Corporal</p>
-                                    <p><i class="fa fa-check text-success-50 mr-2" style="opacity: 0.3;"></i>Cuidado de Manos y Pies</p>
-                                    <a href="appointment.html" class="btn btn-primary my-2" style="border-radius: 50px;">Comprar Ahora</a>
-                                </div>
+                <!-- Columna Izquierda: Tratamientos y Cuidado -->
+                <div class="col-lg-6 pr-lg-5">
+                    
+                    <!-- Menú Premium Wellness -->
+                    <div class="nua-menu-section">
+                        <h3 class="nua-menu-section-title"><i class="fas fa-spa mr-2"></i> Menú Premium Wellness</h3>
+                        
+                        <!-- Item 1 -->
+                        <div class="nua-menu-item">
+                            <div class="nua-menu-item-header">
+                                <h5 class="nua-menu-item-name">Experiencia Essential</h5>
+                                <span class="nua-menu-item-meta">60 min — $700 MXN</span>
                             </div>
-                            <div class="bg-white" style="background-color: #111111 !important; border: 1px solid rgba(197, 168, 128, 0.15);">
-                                <div class="d-flex align-items-center justify-content-between border-bottom border-primary p-4">
-                                    <h1 class="display-4 mb-0 text-white" style="font-family: 'Poppins', sans-serif;">
-                                        <small class="align-top text-primary font-weight-medium" style="font-size: 22px; line-height: 45px;">$</small>99<small class="align-bottom text-white-50 font-weight-medium" style="font-size: 16px; line-height: 40px;">/Mes</small>
-                                    </h1>
-                                    <h5 class="text-primary text-uppercase m-0">Plan Familiar</h5>
-                                </div>
-                                <div class="p-4" style="color: #b0b0b0; font-weight: 300;">
-                                    <p><i class="fa fa-check text-success mr-2"></i>Masaje Corporal Completo</p>
-                                    <p><i class="fa fa-check text-success mr-2"></i>Masaje de Tejido Profundo</p>
-                                    <p><i class="fa fa-check text-success mr-2"></i>Masaje con Piedras Calientes</p>
-                                    <p><i class="fa fa-check text-success mr-2"></i>Exfoliación Corporal</p>
-                                    <p><i class="fa fa-check text-success-50 mr-2" style="opacity: 0.3;"></i>Cuidado de Manos y Pies</p>
-                                    <a href="appointment.html" class="btn btn-primary my-2" style="border-radius: 50px;">Comprar Ahora</a>
-                                </div>
+                            <p class="nua-menu-item-description">Masaje relajante. Ideal para liberar la tensión diaria y reiniciar el cuerpo.</p>
+                            <div class="nua-menu-item-footer">
+                                <a href="appointment.html?service=Essential" class="nua-menu-book-btn">Reservar</a>
                             </div>
-                            <div class="bg-white" style="background-color: #111111 !important; border: 1px solid rgba(197, 168, 128, 0.15);">
-                                <div class="d-flex align-items-center justify-content-between border-bottom border-primary p-4">
-                                    <h1 class="display-4 mb-0 text-white" style="font-family: 'Poppins', sans-serif;">
-                                        <small class="align-top text-primary font-weight-medium" style="font-size: 22px; line-height: 45px;">$</small>149<small class="align-bottom text-white-50 font-weight-medium" style="font-size: 16px; line-height: 40px;">/Mes</small>
-                                    </h1>
-                                    <h5 class="text-primary text-uppercase m-0">Plan VIP</h5>
-                                </div>
-                                <div class="p-4" style="color: #b0b0b0; font-weight: 300;">
-                                    <p><i class="fa fa-check text-success mr-2"></i>Masaje Corporal Completo</p>
-                                    <p><i class="fa fa-check text-success mr-2"></i>Masaje de Tejido Profundo</p>
-                                    <p><i class="fa fa-check text-success mr-2"></i>Masaje con Piedras Calientes</p>
-                                    <p><i class="fa fa-check text-success mr-2"></i>Exfoliación Corporal</p>
-                                    <p><i class="fa fa-check text-success mr-2"></i>Cuidado de Manos y Pies</p>
-                                    <a href="appointment.html" class="btn btn-primary my-2" style="border-radius: 50px;">Comprar Ahora</a>
-                                </div>
+                        </div>
+
+                        <!-- Item 2 -->
+                        <div class="nua-menu-item">
+                            <div class="nua-menu-item-header">
+                                <h5 class="nua-menu-item-name">Experiencia Signature</h5>
+                                <span class="nua-menu-item-meta">90 min — $1,200 MXN</span>
+                            </div>
+                            <p class="nua-menu-item-description">Masaje relajante premium (cuerpo completo y craneofacial). Experiencia profunda de relajación corporal y mental.</p>
+                            <div class="nua-menu-item-footer">
+                                <a href="appointment.html?service=Signature" class="nua-menu-book-btn">Reservar</a>
+                            </div>
+                        </div>
+
+                        <!-- Item 3 -->
+                        <div class="nua-menu-item">
+                            <div class="nua-menu-item-header">
+                                <h5 class="nua-menu-item-name">Experiencia Hard Relax</h5>
+                                <span class="nua-menu-item-meta">60 min — $900 MXN</span>
+                            </div>
+                            <p class="nua-menu-item-description">Masaje descontracturante. Enfocado en aliviar la tensión muscular, corregir la postura y combatir la fatiga física.</p>
+                            <div class="nua-menu-item-footer">
+                                <a href="appointment.html?service=HardRelax" class="nua-menu-book-btn">Reservar</a>
+                            </div>
+                        </div>
+
+                        <!-- Item 4 -->
+                        <div class="nua-menu-item">
+                            <div class="nua-menu-item-header">
+                                <h5 class="nua-menu-item-name">Experiencia Head.Face</h5>
+                                <span class="nua-menu-item-meta">40 min — $500 MXN</span>
+                            </div>
+                            <p class="nua-menu-item-description">Terapia cráneo facial. Dedicada a la relajación profunda de mandíbula, cuello, cabeza y rostro.</p>
+                            <div class="nua-menu-item-footer">
+                                <a href="appointment.html?service=HeadFace" class="nua-menu-book-btn">Reservar</a>
+                            </div>
+                        </div>
+
+                        <!-- Item 5 -->
+                        <div class="nua-menu-item">
+                            <div class="nua-menu-item-header">
+                                <h5 class="nua-menu-item-name">Experiencia Reset</h5>
+                                <span class="nua-menu-item-meta">60 min — $700 MXN</span>
+                            </div>
+                            <p class="nua-menu-item-description">Tratamiento de espalda + cráneo facial. Perfecto para combatir el estrés laboral y el cansancio mental.</p>
+                            <div class="nua-menu-item-footer">
+                                <a href="appointment.html?service=Reset" class="nua-menu-book-btn">Reservar</a>
                             </div>
                         </div>
                     </div>
+
+                    <!-- Body Care -->
+                    <div class="nua-menu-section mt-5">
+                        <h3 class="nua-menu-section-title"><i class="fas fa-magic mr-2"></i> Body Care</h3>
+                        
+                        <div class="nua-menu-item">
+                            <div class="nua-menu-item-header">
+                                <h5 class="nua-menu-item-name">Back Skin Detox</h5>
+                                <span class="nua-menu-item-meta">40 min — $700 MXN</span>
+                            </div>
+                            <p class="nua-menu-item-description">Limpieza profunda de espalda con exfoliación, extracción e hidratación profunda.</p>
+                            <div class="nua-menu-item-footer">
+                                <a href="appointment.html?service=BackSkin" class="nua-menu-book-btn">Reservar</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Columna Derecha: Grooming, Paquetes e Inmersiones -->
+                <div class="col-lg-6 pl-lg-5">
+                    
+                    <!-- Grooming -->
+                    <div class="nua-menu-section">
+                        <h3 class="nua-menu-section-title"><i class="fas fa-shower mr-2"></i> Grooming</h3>
+                        
+                        <!-- Body Grooming -->
+                        <div class="nua-menu-item">
+                            <div class="nua-menu-item-header">
+                                <h5 class="nua-menu-item-name">Body Grooming</h5>
+                                <span class="nua-menu-item-meta">40 min — $600 MXN</span>
+                            </div>
+                            <p class="nua-menu-item-description">Servicio profesional, higiénico y estético dedicado al recorte de vello corporal.</p>
+                            <div class="nua-menu-item-footer">
+                                <a href="appointment.html?service=BodyGrooming" class="nua-menu-book-btn">Reservar</a>
+                            </div>
+                        </div>
+
+                        <!-- Intimate Grooming -->
+                        <div class="nua-menu-item">
+                            <div class="nua-menu-item-header">
+                                <h5 class="nua-menu-item-name">Intimate Grooming</h5>
+                                <span class="nua-menu-item-meta">60 min — $1,200 MXN</span>
+                            </div>
+                            <p class="nua-menu-item-description">Depilación higiénica íntima con cera o sistema híbrido (cera y recorte). Zonas: pierna, glúteo y zona de bikini.</p>
+                            <div class="nua-menu-item-footer">
+                                <a href="appointment.html?service=IntimateGrooming" class="nua-menu-book-btn">Reservar</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Paquetes -->
+                    <div class="nua-menu-section mt-5">
+                        <h3 class="nua-menu-section-title"><i class="fas fa-briefcase mr-2"></i> Paquetes</h3>
+                        
+                        <div class="nua-menu-item">
+                            <div class="nua-menu-item-header">
+                                <h5 class="nua-menu-item-name">Ritual Office Reset</h5>
+                                <span class="nua-menu-item-meta">70 min — $850 MXN</span>
+                            </div>
+                            <p class="nua-menu-item-description">Terapia concentrada para espalda, cuello y masaje cráneo facial. Especialmente diseñado para aliviar el estrés laboral.</p>
+                            <div class="nua-menu-item-footer">
+                                <a href="appointment.html?service=OfficeReset" class="nua-menu-book-btn">Reservar</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Inmersiones -->
+                    <div class="nua-menu-section mt-5">
+                        <h3 class="nua-menu-section-title"><i class="fas fa-wine-glass-alt mr-2"></i> Inmersiones</h3>
+                        
+                        <!-- Ritual Recovery -->
+                        <div class="nua-menu-item" style="border: 1px solid rgba(197, 168, 128, 0.15); padding: 25px; border-radius: 6px; background: rgba(17, 17, 17, 0.6); margin-bottom: 25px;">
+                            <div class="nua-menu-item-header">
+                                <h5 class="nua-menu-item-name" style="color: #c5a880;">Ritual Recovery</h5>
+                                <span class="nua-menu-item-meta">90 min — $1,350 MXN</span>
+                            </div>
+                            <p class="nua-menu-item-description mb-3">Terapia de restauración muscular integral que fusiona:</p>
+                            <ul class="list-unstyled text-white-50 mb-3" style="font-size: 0.85rem; padding-left: 10px; line-height: 1.8;">
+                                <li><i class="fa fa-circle text-primary mr-2" style="font-size: 0.5rem; vertical-align: middle;"></i> Masaje descontracturante profundo.</li>
+                                <li><i class="fa fa-circle text-primary mr-2" style="font-size: 0.5rem; vertical-align: middle;"></i> Masaje craneofacial.</li>
+                                <li><i class="fa fa-circle text-primary mr-2" style="font-size: 0.5rem; vertical-align: middle;"></i> Experiencia sensorial complementada con copa de vino y chocolates selectos.</li>
+                            </ul>
+                            <p class="text-primary font-weight-normal mb-2" style="font-size: 0.8rem; font-style: italic;">Ideal para: gym/work stress.</p>
+                            <div class="nua-menu-item-footer">
+                                <a href="appointment.html?service=RitualRecovery" class="nua-menu-book-btn">Reservar</a>
+                            </div>
+                        </div>
+
+                        <!-- Ritual Full Reset -->
+                        <div class="nua-menu-item" style="border: 1px solid rgba(197, 168, 128, 0.15); padding: 25px; border-radius: 6px; background: rgba(17, 17, 17, 0.6);">
+                            <div class="nua-menu-item-header">
+                                <h5 class="nua-menu-item-name" style="color: #c5a880;">Ritual Full Reset</h5>
+                                <span class="nua-menu-item-meta">130 min — $1,800 MXN</span>
+                            </div>
+                            <p class="nua-menu-item-description mb-3">Nuestra inmersión insignia de bienestar absoluto y relajación extrema:</p>
+                            <ul class="list-unstyled text-white-50 mb-3" style="font-size: 0.85rem; padding-left: 10px; line-height: 1.8;">
+                                <li><i class="fa fa-circle text-primary mr-2" style="font-size: 0.5rem; vertical-align: middle;"></i> Masaje de cuerpo completo premium.</li>
+                                <li><i class="fa fa-circle text-primary mr-2" style="font-size: 0.5rem; vertical-align: middle;"></i> Terapia cráneo facial relajante.</li>
+                                <li><i class="fa fa-circle text-primary mr-2" style="font-size: 0.5rem; vertical-align: middle;"></i> Tratamiento Back Skin Detox de espalda.</li>
+                                <li><i class="fa fa-circle text-primary mr-2" style="font-size: 0.5rem; vertical-align: middle;"></i> Experiencia sensorial premium complementada con copa de vino y chocolates.</li>
+                            </ul>
+                            <div class="nua-menu-item-footer">
+                                <a href="appointment.html?service=RitualFullReset" class="nua-menu-book-btn">Reservar</a>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
+            
         </div>
     </div>
-    <!-- Pricing End -->
+    <!-- Menu End -->
 
 
     <!-- Open Hours Start -->
@@ -239,7 +363,7 @@
                                 <a class="mb-2 text-white-50" href="index.html"><i class="fa fa-angle-right mr-2" style="color: #c5a880;"></i>Inicio</a>
                                 <a class="mb-2 text-white-50" href="about.html"><i class="fa fa-angle-right mr-2" style="color: #c5a880;"></i>Nosotros</a>
                                 <a class="mb-2 text-white-50" href="service.html"><i class="fa fa-angle-right mr-2" style="color: #c5a880;"></i>Nuestros Servicios</a>
-                                <a class="mb-2 text-white-50" href="price.html"><i class="fa fa-angle-right mr-2" style="color: #c5a880;"></i>Planes de Precios</a>
+                                <a class="mb-2 text-white-50" href="price.html"><i class="fa fa-angle-right mr-2" style="color: #c5a880;"></i>Menú de Precios</a>
                                 <a class="text-white-50" href="contact.html"><i class="fa fa-angle-right mr-2" style="color: #c5a880;"></i>Contacto</a>
                             </div>
                         </div>
@@ -304,6 +428,7 @@
     <script src="mail/contact.js"></script>
 
     <!-- Template Javascript -->
+    <script src="js/booking.js"></script>
     <script src="js/main.js"></script>
 </body>
 
