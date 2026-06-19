@@ -2,12 +2,12 @@
 // Reemplaza los siguientes valores con las credenciales de tu proyecto de Firebase
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBz75llqhQ4dfN40GuGGpkqQXZLCmNCpw8",
-    authDomain: "nua-wellness-spa.firebaseapp.com",
-    projectId: "nua-wellness-spa",
-    storageBucket: "nua-wellness-spa.firebasestorage.app",
-    messagingSenderId: "318752031802",
-    appId: "1:318752031802:web:27c0c08229735fb3fba103"
+    apiKey: "AIzaSyCM4X4OwJWo21tS-4pbQZfKu87zod8uwTA",
+    authDomain: "solea-wellness-spa.firebaseapp.com",
+    projectId: "solea-wellness-spa",
+    storageBucket: "solea-wellness-spa.firebasestorage.app",
+    messagingSenderId: "501062864931",
+    appId: "1:501062864931:web:df3dee46448d3b87f16196"
 };
 
 // Inicializar Firebase

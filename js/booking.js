@@ -447,6 +447,9 @@ document.addEventListener('DOMContentLoaded', () => {
                             if (serviceSelect) serviceSelect.value = '';
 
                             showSoleaToast(`¡Cita agendada con éxito para ${serviceText}!`, 'success');
+
+                            // Enviar correo de confirmación automático
+                            sendConfirmationEmail(appointment);
                         })
                         .catch(error => {
                             console.error("Error guardando cita en Firestore: ", error);
@@ -741,6 +744,48 @@ document.addEventListener('DOMContentLoaded', () => {
                 toast.parentNode.removeChild(toast);
             }
         }, 400);
+    }
+
+    // Cargar dinámicamente EmailJS
+    function loadEmailJS() {
+        if (typeof emailjs !== 'undefined') return Promise.resolve();
+        return new Promise((resolve, reject) => {
+            const script = document.createElement('script');
+            script.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';
+            script.onload = () => {
+                emailjs.init({
+                    publicKey: 'p2bviJCcn9yo-I-W2'
+                });
+                resolve();
+            };
+            script.onerror = (err) => reject(err);
+            document.head.appendChild(script);
+        });
+    }
+
+    // Enviar correo de confirmación usando EmailJS
+    function sendConfirmationEmail(appointment) {
+        loadEmailJS()
+            .then(() => {
+                const templateParams = {
+                    name: appointment.name,
+                    email: appointment.email,
+                    service: appointment.service,
+                    date: appointment.date,
+                    time: appointment.time
+                };
+
+                emailjs.send('service_q8yeqrl', 'template_bwj4txm', templateParams)
+                    .then(response => {
+                        console.log('¡Correo enviado con éxito por EmailJS!', response.status, response.text);
+                    })
+                    .catch(err => {
+                        console.error('Error al enviar el correo con EmailJS:', err);
+                    });
+            })
+            .catch(error => {
+                console.error('No se pudo cargar la librería EmailJS:', error);
+            });
     }
 
     // Helper to prevent HTML injection
