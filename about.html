@@ -90,6 +90,14 @@
                     </div>
                     <a href="contact.html" class="nav-item nav-link">Contacto</a>
                     <a href="#" class="nav-item nav-link nav-item-nua-gold"><i class="far fa-calendar-check mr-1"></i> Mis Reservas <span class="badge badge-primary ml-1" style="display: none;">0</span></a>
+                    <!-- Elementos de Autenticación de Usuario -->
+                    <a href="#" id="nuaLoginBtn" class="nav-item nav-link" style="color: #c5a880 !important;"><i class="fas fa-sign-in-alt mr-1"></i> Iniciar Sesión</a>
+                    <div class="nav-item dropdown" id="nuaUserDropdown" style="display: none;">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" id="nuaUserDropdownText" style="color: #c5a880 !important;"><i class="fas fa-user-circle mr-1"></i> Mi Perfil</a>
+                        <div class="dropdown-menu rounded-0 m-0" style="background-color: #050505; border: 1px solid rgba(197, 168, 128, 0.15);">
+                            <a href="#" id="nuaLogoutBtn" class="dropdown-item" style="color: #dc3545;"><i class="fas fa-sign-out-alt mr-1"></i> Cerrar Sesión</a>
+                        </div>
+                    </div>
                 </div>
                 <a href="appointment.html" class="btn btn-primary d-none d-lg-block" style="border-radius: 50px; padding: 8px 25px;">Reservar</a>
             </div>
@@ -321,6 +329,12 @@
     <!-- Contact Javascript File -->
     <script src="mail/jqBootstrapValidation.min.js"></script>
     <script src="mail/contact.js"></script>
+
+    <!-- Firebase SDK (Compat) -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <script src="js/firebase-config.js"></script>
 
     <!-- Template Javascript -->
     <script src="js/booking.js"></script>

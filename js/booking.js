@@ -1,22 +1,40 @@
 /**
- * NÜA Wellness Spa - Interactive Booking System
- * Manages appointment CRUD using localStorage and renders premium UI components
+ * NÜA Wellness Spa - Interactive Booking System with Firebase Integration
+ * Manages appointment CRUD using Firestore and handles authentication with Firebase Auth
  */
 
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Initialize UI Elements dynamically
     injectUiElements();
 
-    // Cache DOM Elements
+    // Cache DOM Elements for Appointments Modal
     const modalOverlay = document.getElementById('nuaModalOverlay');
     const modalClose = document.getElementById('nuaModalClose');
     const floatingBtn = document.getElementById('nuaFloatingBtn');
     const apptsListContainer = document.getElementById('nuaApptsList');
 
-    // 2. Load and Bind Appointments
-    updateBadges();
+    // Cache DOM Elements for Auth Modal
+    const authModalOverlay = document.getElementById('nuaAuthModalOverlay');
+    const authModalClose = document.getElementById('nuaAuthModalClose');
+    const loginBtn = document.getElementById('nuaLoginBtn');
+    const logoutBtn = document.getElementById('nuaLogoutBtn');
+    const userDropdown = document.getElementById('nuaUserDropdown');
+    const userDropdownText = document.getElementById('nuaUserDropdownText');
+    
+    const loginForm = document.getElementById('nuaLoginForm');
+    const registerForm = document.getElementById('nuaRegisterForm');
+    const switchToRegister = document.getElementById('switchToRegister');
+    const switchToLogin = document.getElementById('switchToLogin');
+    const authModalTitle = document.getElementById('nuaAuthModalTitle');
 
-    // Event Listeners for Modal
+    const googleLoginBtn = document.getElementById('nuaGoogleLoginBtn');
+
+    // Session State & Subscriptions
+    let currentUser = null;
+    let appointmentsListener = null;
+    let activeAppointments = [];
+
+    // 2. Event Listeners for Appointments Modal
     if (floatingBtn) {
         floatingBtn.addEventListener('click', () => {
             renderAppointments();
@@ -34,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Bind Navbar link if present
+    // Bind Navbar links for "Mis Reservas"
     document.querySelectorAll('.nav-item-nua-gold').forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
@@ -43,13 +61,240 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Auto-select service from URL parameter (e.g. ?service=Essential)
+    // 3. Event Listeners for Auth Modal
+    function openAuthModal() {
+        if (!authModalOverlay) return;
+        authModalOverlay.style.display = 'flex';
+        setTimeout(() => {
+            authModalOverlay.classList.add('show');
+        }, 10);
+    }
+
+    function closeAuthModal() {
+        if (!authModalOverlay) return;
+        authModalOverlay.classList.remove('show');
+        setTimeout(() => {
+            authModalOverlay.style.display = 'none';
+            // Restablecer al formulario de login por defecto al cerrar
+            if (loginForm && registerForm && authModalTitle) {
+                loginForm.style.display = 'block';
+                registerForm.style.display = 'none';
+                authModalTitle.textContent = 'Iniciar Sesión';
+            }
+        }, 300);
+    }
+
+    if (loginBtn) {
+        loginBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            openAuthModal();
+        });
+    }
+
+    if (authModalClose) {
+        authModalClose.addEventListener('click', closeAuthModal);
+    }
+
+    if (authModalOverlay) {
+        authModalOverlay.addEventListener('click', (e) => {
+            if (e.target === authModalOverlay) closeAuthModal();
+        });
+    }
+
+    if (switchToRegister) {
+        switchToRegister.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginForm.style.display = 'none';
+            registerForm.style.display = 'block';
+            authModalTitle.textContent = 'Registrarse';
+        });
+    }
+
+    if (switchToLogin) {
+        switchToLogin.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginForm.style.display = 'block';
+            registerForm.style.display = 'none';
+            authModalTitle.textContent = 'Iniciar Sesión';
+        });
+    }
+
+    // 4. Firebase Auth Listeners & Forms Submission
+    if (typeof auth !== 'undefined' && auth) {
+        auth.onAuthStateChanged(user => {
+            currentUser = user;
+            if (user) {
+                // El usuario ha iniciado sesión
+                if (loginBtn) loginBtn.style.display = 'none';
+                if (userDropdown) userDropdown.style.display = 'block';
+                if (userDropdownText) {
+                    userDropdownText.innerHTML = `<i class="fas fa-user-circle mr-1"></i> ${escapeHtml(user.displayName || user.email.split('@')[0])}`;
+                }
+                
+                // Pre-rellenar campos de formulario y bloquearlos para evitar errores
+                const nameInput = document.querySelector('.nua-name');
+                const emailInput = document.querySelector('.nua-email');
+                if (nameInput) {
+                    nameInput.value = user.displayName || '';
+                    nameInput.setAttribute('readonly', 'readonly');
+                    nameInput.style.backgroundColor = 'rgba(255, 255, 255, 0.05)';
+                    nameInput.style.borderColor = 'rgba(197, 168, 128, 0.4)';
+                }
+                if (emailInput) {
+                    emailInput.value = user.email || '';
+                    emailInput.setAttribute('readonly', 'readonly');
+                    emailInput.style.backgroundColor = 'rgba(255, 255, 255, 0.05)';
+                    emailInput.style.borderColor = 'rgba(197, 168, 128, 0.4)';
+                }
+
+                // Suscribirse a las citas del usuario en tiempo real desde Firestore
+                subscribeToAppointments(user.uid);
+            } else {
+                // El usuario ha cerrado sesión
+                if (loginBtn) loginBtn.style.display = 'block';
+                if (userDropdown) userDropdown.style.display = 'none';
+                
+                // Limpiar y desbloquear campos de formulario
+                const nameInput = document.querySelector('.nua-name');
+                const emailInput = document.querySelector('.nua-email');
+                if (nameInput) {
+                    nameInput.value = '';
+                    nameInput.removeAttribute('readonly');
+                    nameInput.style.backgroundColor = 'transparent';
+                    nameInput.style.borderColor = 'rgba(255,255,255,0.15)';
+                }
+                if (emailInput) {
+                    emailInput.value = '';
+                    emailInput.removeAttribute('readonly');
+                    emailInput.style.backgroundColor = 'transparent';
+                    emailInput.style.borderColor = 'rgba(255,255,255,0.15)';
+                }
+
+                // Desvincular listener de base de datos
+                if (appointmentsListener) {
+                    appointmentsListener();
+                    appointmentsListener = null;
+                }
+                
+                // Limpiar listado visual y badges
+                activeAppointments = [];
+                updateBadges(0);
+                renderAppointments([]);
+            }
+        });
+    }
+
+    // Iniciar Sesión con Correo/Contraseña
+    if (loginForm && typeof auth !== 'undefined' && auth) {
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('nuaLoginEmail').value.trim();
+            const password = document.getElementById('nuaLoginPassword').value;
+
+            if (!email || !password) {
+                showNuaToast('Ingresa tu correo y contraseña.', 'error');
+                return;
+            }
+
+            auth.signInWithEmailAndPassword(email, password)
+                .then(() => {
+                    showNuaToast('¡Sesión iniciada con éxito!', 'success');
+                    closeAuthModal();
+                    loginForm.reset();
+                })
+                .catch(error => {
+                    let errorMsg = 'Error al iniciar sesión.';
+                    if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password' || error.code === 'auth/invalid-credential') {
+                        errorMsg = 'Correo o contraseña incorrectos.';
+                    } else if (error.code === 'auth/invalid-email') {
+                        errorMsg = 'El formato del correo es inválido.';
+                    }
+                    showNuaToast(errorMsg, 'error');
+                });
+        });
+    }
+
+    // Registrarse con Correo/Contraseña
+    if (registerForm && typeof auth !== 'undefined' && auth) {
+        registerForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('nuaRegisterName').value.trim();
+            const email = document.getElementById('nuaRegisterEmail').value.trim();
+            const password = document.getElementById('nuaRegisterPassword').value;
+
+            if (!name || !email || !password) {
+                showNuaToast('Completa todos los campos.', 'error');
+                return;
+            }
+
+            if (password.length < 6) {
+                showNuaToast('La contraseña debe tener al menos 6 caracteres.', 'error');
+                return;
+            }
+
+            auth.createUserWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                    return user.updateProfile({
+                        displayName: name
+                    });
+                })
+                .then(() => {
+                    showNuaToast('¡Cuenta creada y sesión iniciada!', 'success');
+                    closeAuthModal();
+                    registerForm.reset();
+                })
+                .catch(error => {
+                    let errorMsg = 'Error al registrarse.';
+                    if (error.code === 'auth/email-already-in-use') {
+                        errorMsg = 'El correo ya está registrado.';
+                    } else if (error.code === 'auth/invalid-email') {
+                        errorMsg = 'El formato del correo es inválido.';
+                    } else if (error.code === 'auth/weak-password') {
+                        errorMsg = 'La contraseña es muy débil.';
+                    }
+                    showNuaToast(errorMsg, 'error');
+                });
+        });
+    }
+
+    // Google Sign-In
+    if (googleLoginBtn && typeof auth !== 'undefined' && auth && typeof googleProvider !== 'undefined' && googleProvider) {
+        googleLoginBtn.addEventListener('click', () => {
+            auth.signInWithPopup(googleProvider)
+                .then(() => {
+                    showNuaToast('¡Sesión iniciada con Google!', 'success');
+                    closeAuthModal();
+                })
+                .catch(error => {
+                    if (error.code !== 'auth/popup-closed-by-user') {
+                        showNuaToast('Error al iniciar sesión con Google. Revisa que el proveedor esté habilitado en Firebase.', 'error');
+                    }
+                });
+        });
+    }
+
+
+    // Cerrar Sesión
+    if (logoutBtn && typeof auth !== 'undefined' && auth) {
+        logoutBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            auth.signOut()
+                .then(() => {
+                    showNuaToast('Sesión cerrada con éxito.', 'success');
+                })
+                .catch(() => {
+                    showNuaToast('Error al cerrar sesión.', 'error');
+                });
+        });
+    }
+
+    // Auto-seleccionar servicio desde parámetros URL (ej. ?service=Essential)
     const urlParams = new URLSearchParams(window.location.search);
     const serviceParam = urlParams.get('service');
     if (serviceParam) {
         const selectElement = document.querySelector('.nua-service');
         if (selectElement) {
-            // Find option with matching value
             const option = selectElement.querySelector(`option[value="${serviceParam}"]`);
             if (option) {
                 selectElement.value = serviceParam;
@@ -57,17 +302,46 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 3. Intercept Booking Forms
+    // 5. Intercept Booking Forms
     bindBookingForms();
 
-    // 4. Intercept Newsletter Forms
+    // 6. Intercept Newsletter Forms
     bindNewsletterForms();
 
     /* ==========================================
-       Core Functions
+       Core Functions (Firestore & Rendering)
        ========================================== */
 
-    // Open/Close Modal
+    // Suscribirse a las citas del usuario en tiempo real desde Firestore
+    function subscribeToAppointments(uid) {
+        if (typeof db === 'undefined' || !db) return;
+
+        // Desvincular listener anterior si existiera
+        if (appointmentsListener) appointmentsListener();
+
+        appointmentsListener = db.collection('appointments')
+            .where('uid', '==', uid)
+            .onSnapshot(snapshot => {
+                activeAppointments = [];
+                snapshot.forEach(doc => {
+                    const data = doc.data();
+                    activeAppointments.push({
+                        id: doc.id,
+                        ...data
+                    });
+                });
+
+                // Actualizar contadores y renderizar lista
+                updateBadges(activeAppointments.length);
+                renderAppointments(activeAppointments);
+            }, error => {
+                console.error("Error al cargar citas de Firestore: ", error);
+                // Si falta permisos, es muy probable que no tenga reglas Firestore adecuadas.
+                showNuaToast('Error de permisos en Base de Datos. Recuerda activar Firestore en modo prueba o configurar las reglas.', 'error');
+            });
+    }
+
+    // Open/Close Appointments Modal
     function openModal() {
         modalOverlay.style.display = 'flex';
         setTimeout(() => {
@@ -89,14 +363,21 @@ document.addEventListener('DOMContentLoaded', () => {
             form.addEventListener('submit', (e) => {
                 e.preventDefault();
 
-                // Retrieve inputs safely
+                // Validar si el usuario está autenticado. Si no, forzar login.
+                if (!currentUser) {
+                    showNuaToast('Debes iniciar sesión para agendar una cita de spa.', 'error');
+                    openAuthModal();
+                    return;
+                }
+
+                // Recuperar inputs de forma segura
                 const nameInput = form.querySelector('.nua-name');
                 const emailInput = form.querySelector('.nua-email');
                 const dateInput = form.querySelector('.nua-date');
                 const timeInput = form.querySelector('.nua-time');
                 const serviceSelect = form.querySelector('.nua-service');
 
-                // Validations
+                // Validaciones
                 if (!nameInput || !emailInput || !dateInput || !timeInput || !serviceSelect) {
                     showNuaToast('Error interno al procesar el formulario.', 'error');
                     return;
@@ -119,18 +400,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     return;
                 }
 
-                // Email check
+                // Validación de formato de correo
                 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 if (!emailRegex.test(email)) {
                     showNuaToast('Por favor, ingresa un correo electrónico válido.', 'error');
                     return;
                 }
 
-                // Date checks (Future check)
+                // Validación de fecha (Futura o presente)
                 const parts = date.split('/');
                 let selectedDate;
                 if (parts.length === 3) {
-                    // Expecting MM/DD/YYYY from Tempus Dominus
+                    // Esperando formato MM/DD/YYYY de Tempus Dominus
                     selectedDate = new Date(parts[2], parts[0] - 1, parts[1]);
                 } else {
                     selectedDate = new Date(date);
@@ -144,9 +425,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     return;
                 }
 
-                // Create appointment object
+                // Crear objeto de cita con uid de Firebase
                 const appointment = {
-                    id: 'nua_' + Date.now(),
+                    uid: currentUser.uid,
                     name: name,
                     email: email,
                     date: date,
@@ -155,30 +436,30 @@ document.addEventListener('DOMContentLoaded', () => {
                     createdAt: new Date().toISOString()
                 };
 
-                // Save to localStorage
-                const appts = getAppointmentsFromStorage();
-                appts.push(appointment);
-                localStorage.setItem('nua_appointments', JSON.stringify(appts));
+                // Guardar en Firestore
+                if (typeof db !== 'undefined' && db) {
+                    db.collection('appointments').add(appointment)
+                        .then(() => {
+                            // Limpiar solo los campos de la cita (fecha, hora, servicio)
+                            // Mantener nombre y correo ya que están bloqueados con la sesión activa
+                            if (dateInput) dateInput.value = '';
+                            if (timeInput) timeInput.value = '';
+                            if (serviceSelect) serviceSelect.value = '';
 
-                // Reset form fields
-                form.reset();
-                if (form.querySelector('.datetimepicker-input')) {
-                    // Reset widget values if possible
-                    $(nameInput).val('');
-                    $(emailInput).val('');
+                            showNuaToast(`¡Cita agendada con éxito para ${serviceText}!`, 'success');
+                        })
+                        .catch(error => {
+                            console.error("Error guardando cita en Firestore: ", error);
+                            showNuaToast('Error de conexión al guardar tu cita. Revisa tu consola.', 'error');
+                        });
+                } else {
+                    showNuaToast('Error de inicialización de Base de Datos. Firebase no está configurado.', 'error');
                 }
-
-                // UI Updates
-                updateBadges();
-                showNuaToast(`¡Cita agendada con éxito para ${serviceText}!`, 'success');
-                
-                // Track modal update
-                renderAppointments();
             });
         });
     }
 
-    // Bind Newsletter Subscriptions
+    // Bind Newsletter Subscriptions (Se mantiene local como simulador)
     function bindNewsletterForms() {
         const newsletterInputs = document.querySelectorAll('.footer input[type="text"]');
         newsletterInputs.forEach(input => {
@@ -205,9 +486,26 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Render list in modal
-    function renderAppointments() {
-        const appts = getAppointmentsFromStorage();
+    function renderAppointments(appts = activeAppointments) {
         apptsListContainer.innerHTML = '';
+
+        if (!currentUser) {
+            apptsListContainer.innerHTML = `
+                <div class="nua-no-appointments">
+                    <div class="nua-no-appointments-icon"><i class="fas fa-user-lock"></i></div>
+                    <p style="color: rgba(255, 255, 255, 0.6); margin-bottom: 0;">Inicia sesión para gestionar y revisar tus citas.</p>
+                    <button class="btn btn-primary btn-sm mt-3" id="nuaModalLoginBtn" style="border-radius: 50px; padding: 6px 20px;">Iniciar Sesión</button>
+                </div>
+            `;
+            const modalLoginBtn = document.getElementById('nuaModalLoginBtn');
+            if (modalLoginBtn) {
+                modalLoginBtn.addEventListener('click', () => {
+                    closeModal();
+                    openAuthModal();
+                });
+            }
+            return;
+        }
 
         if (appts.length === 0) {
             apptsListContainer.innerHTML = `
@@ -220,7 +518,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Sort by date (descending for now)
+        // Ordenar por fecha cronológicamente
         appts.sort((a, b) => new Date(a.date) - new Date(b.date));
 
         appts.forEach(appt => {
@@ -238,7 +536,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <button class="nua-appt-cancel-btn" data-id="${appt.id}">Cancelar</button>
             `;
 
-            // Bind cancel button
+            // Enlazar botón de cancelar
             card.querySelector('.nua-appt-cancel-btn').addEventListener('click', () => {
                 cancelAppointment(appt.id, appt.service);
             });
@@ -247,29 +545,25 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Cancel appointment
+    // Cancel appointment from Firestore
     function cancelAppointment(id, serviceName) {
+        if (!currentUser) return;
         if (confirm(`¿Estás seguro de que deseas cancelar tu cita para: ${serviceName}?`)) {
-            let appts = getAppointmentsFromStorage();
-            appts = appts.filter(a => a.id !== id);
-            localStorage.setItem('nua_appointments', JSON.stringify(appts));
-
-            showNuaToast('Cita cancelada con éxito.', 'success');
-            updateBadges();
-            renderAppointments();
+            if (typeof db !== 'undefined' && db) {
+                db.collection('appointments').doc(id).delete()
+                    .then(() => {
+                        showNuaToast('Cita cancelada con éxito.', 'success');
+                    })
+                    .catch(error => {
+                        console.error("Error al cancelar cita en Firestore: ", error);
+                        showNuaToast('Error al cancelar la cita.', 'error');
+                    });
+            }
         }
     }
 
-    // Retrieve from storage helper
-    function getAppointmentsFromStorage() {
-        const data = localStorage.getItem('nua_appointments');
-        return data ? JSON.parse(data) : [];
-    }
-
     // Update floating badge and navbar indicator count
-    function updateBadges() {
-        const count = getAppointmentsFromStorage().length;
-        
+    function updateBadges(count = 0) {
         // Floating badge count
         const badge = document.getElementById('nuaFloatingBadge');
         if (badge) {
@@ -295,7 +589,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.appendChild(toastContainer);
         }
 
-        // 2. Modal Overlay
+        // 2. Appointments Modal Overlay
         if (!document.getElementById('nuaModalOverlay')) {
             const modalOverlay = document.createElement('div');
             modalOverlay.id = 'nuaModalOverlay';
@@ -328,6 +622,73 @@ document.addEventListener('DOMContentLoaded', () => {
                 <span class="nua-floating-badge" id="nuaFloatingBadge" style="display: none;">0</span>
             `;
             document.body.appendChild(floatingBtn);
+        }
+
+        // 4. Elegant Authentication Modal Overlay
+        if (!document.getElementById('nuaAuthModalOverlay')) {
+            const authModalOverlay = document.createElement('div');
+            authModalOverlay.id = 'nuaAuthModalOverlay';
+            authModalOverlay.className = 'nua-modal-overlay';
+            authModalOverlay.innerHTML = `
+                <div class="nua-modal nua-auth-modal">
+                    <div class="nua-modal-header">
+                        <h4 class="nua-modal-title" id="nuaAuthModalTitle">Iniciar Sesión</h4>
+                        <button class="nua-modal-close" id="nuaAuthModalClose">&times;</button>
+                    </div>
+                    <div class="nua-modal-body">
+                        <!-- Formulario de Inicio de Sesión -->
+                        <form id="nuaLoginForm" class="nua-auth-form">
+                            <p class="text-white-50 text-center mb-4" style="font-size: 0.9rem; font-weight: 300;">Inicia sesión para gestionar y agendar tus experiencias sensoriales.</p>
+                            <div class="form-group mb-3">
+                                <label class="text-white-50" style="font-size: 0.85rem;">Correo Electrónico</label>
+                                <input type="email" id="nuaLoginEmail" class="form-control bg-transparent text-white" placeholder="ejemplo@correo.com" required style="border: 1px solid rgba(197, 168, 128, 0.25); color: #fff;">
+                            </div>
+                            <div class="form-group mb-4">
+                                <label class="text-white-50" style="font-size: 0.85rem;">Contraseña</label>
+                                <input type="password" id="nuaLoginPassword" class="form-control bg-transparent text-white" placeholder="Mínimo 6 caracteres" required style="border: 1px solid rgba(197, 168, 128, 0.25); color: #fff;">
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block mb-3" style="height: 45px; font-size: 0.9rem; letter-spacing: 1px;">Ingresar</button>
+                            <p class="text-center text-white-50" style="font-size: 0.85rem;">
+                                ¿No tienes cuenta? <a href="#" id="switchToRegister" style="color: #c5a880; font-weight: 500;">Regístrate aquí</a>
+                            </p>
+                        </form>
+
+                        <!-- Formulario de Registro (Oculto por defecto) -->
+                        <form id="nuaRegisterForm" class="nua-auth-form" style="display: none;">
+                            <p class="text-white-50 text-center mb-4" style="font-size: 0.9rem; font-weight: 300;">Crea tu cuenta exclusiva de cliente NÜA Wellness Spa.</p>
+                            <div class="form-group mb-3">
+                                <label class="text-white-50" style="font-size: 0.85rem;">Nombre Completo</label>
+                                <input type="text" id="nuaRegisterName" class="form-control bg-transparent text-white" placeholder="Tu Nombre Completo" required style="border: 1px solid rgba(197, 168, 128, 0.25); color: #fff;">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="text-white-50" style="font-size: 0.85rem;">Correo Electrónico</label>
+                                <input type="email" id="nuaRegisterEmail" class="form-control bg-transparent text-white" placeholder="ejemplo@correo.com" required style="border: 1px solid rgba(197, 168, 128, 0.25); color: #fff;">
+                            </div>
+                            <div class="form-group mb-4">
+                                <label class="text-white-50" style="font-size: 0.85rem;">Contraseña</label>
+                                <input type="password" id="nuaRegisterPassword" class="form-control bg-transparent text-white" placeholder="Mínimo 6 caracteres" required style="border: 1px solid rgba(197, 168, 128, 0.25); color: #fff;">
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block mb-3" style="height: 45px; font-size: 0.9rem; letter-spacing: 1px;">Registrarse</button>
+                            <p class="text-center text-white-50" style="font-size: 0.85rem;">
+                                ¿Ya tienes cuenta? <a href="#" id="switchToLogin" style="color: #c5a880; font-weight: 500;">Inicia sesión aquí</a>
+                            </p>
+                        </form>
+
+                        <!-- Proveedor Social (Google) -->
+                        <div class="nua-social-divider my-4">
+                            <span class="text-white-50" style="font-size: 0.8rem; background: #0a0a0a; padding: 0 10px; font-family: 'Poppins', sans-serif; letter-spacing: 1px;">O INGRESA CON</span>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <button type="button" id="nuaGoogleLoginBtn" class="btn btn-outline-light btn-block d-flex align-items-center justify-content-center" style="border-color: rgba(255,255,255,0.15); height: 45px; color: #fff; font-size: 0.85rem; font-weight: 500;">
+                                    <i class="fab fa-google mr-2" style="color: #ea4335;"></i> Google
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(authModalOverlay);
         }
     }
 

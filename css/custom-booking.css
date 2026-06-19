@@ -414,3 +414,69 @@
     box-shadow: 0 4px 10px rgba(197, 168, 128, 0.25);
 }
 
+/* 7. Premium Authentication Modal & Social Buttons */
+.nua-auth-modal {
+    max-width: 480px !important;
+}
+
+.nua-auth-form .form-control:focus {
+    background: rgba(197, 168, 128, 0.05) !important;
+    border-color: #c5a880 !important;
+    box-shadow: 0 0 8px rgba(197, 168, 128, 0.25) !important;
+}
+
+.nua-social-divider {
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.nua-social-divider::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: rgba(197, 168, 128, 0.15);
+    z-index: -1;
+}
+
+#nuaGoogleLoginBtn {
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.03);
+}
+
+#nuaGoogleLoginBtn:hover {
+    background: rgba(234, 67, 53, 0.1) !important;
+    border-color: rgba(234, 67, 53, 0.4) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(234, 67, 53, 0.15);
+}
+
+#switchToRegister:hover, #switchToLogin:hover {
+    text-decoration: underline;
+}
+
+/* User Profile Styling in dropdown */
+#nuaUserDropdownText {
+    font-weight: 500;
+}
+
+#nuaUserDropdown .dropdown-menu {
+    box-shadow: 0 8px 30px rgba(0,0,0,0.8) !important;
+}
+
+#nuaUserDropdown .dropdown-item {
+    padding: 10px 20px;
+    font-size: 0.85rem;
+    font-weight: 400;
+    transition: background 0.2s;
+}
+
+#nuaUserDropdown .dropdown-item:hover {
+    background: rgba(220, 53, 69, 0.1) !important;
+    color: #ff4d5e !important;
+}
+
+
