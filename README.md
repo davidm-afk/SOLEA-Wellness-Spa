@@ -1,4 +1,4 @@
-# 🌟 NÜA Wellness Spa — Centro de Estética & Bienestar de Lujo
+# 🌟 SÖLEA Wellness Spa — Centro de Estética & Bienestar de Lujo
 
 [![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)](https://developer.mozilla.org/es/docs/Web/HTML)
 [![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/es/docs/Web/CSS)
@@ -6,12 +6,12 @@
 [![Bootstrap](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white)](https://getbootstrap.com/)
 [![JS](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/es/docs/Web/JavaScript)
 
-**NÜA Wellness Spa** es un sitio web premium y sofisticado diseñado exclusivamente para centros de estética, spas de lujo y clínicas de bienestar. Con una identidad visual refinada en **tonos dorados y negros**, el sitio ofrece una experiencia sensorial y elegante que refleja el lujo, la armonía y la exclusividad del centro.
+**SÖLEA Wellness Spa** es un sitio web premium y sofisticado diseñado exclusivamente para centros de estética, spas de lujo y clínicas de bienestar. Con una identidad visual refinada en **tonos dorados y negros**, el sitio ofrece una experiencia sensorial y elegante que refleja el lujo, la armonía y la exclusividad del centro.
 
 ---
 
 ## 🖤 Identidad Visual & Diseño
-El diseño de NÜA Wellness Spa ha sido personalizado meticulosamente para ofrecer una experiencia estética premium:
+El diseño de SÖLEA Wellness Spa ha sido personalizado meticulosamente para ofrecer una experiencia estética premium:
 *   **Paleta de Colores de Lujo:** Uso predominante de un negro profundo (`#050505`) como fondo, combinado con detalles y acentos en oro refinado (`#c5a880`), creando un contraste de alta gama, místico y sumamente profesional.
 *   **Tipografía Elegante:** Combinación de fuentes modernas y de alta legibilidad como *Poppins* para el cuerpo y textos interactivos, y fuentes serif premium como *Cormorant Garamond* para títulos y acentos de lujo.
 *   **Efectos Visuales Impecables:** Microanimaciones en botones, efectos de transición suave (fade-in), tarjetas de servicio con efectos de profundidad y elevación (glassmorphism sutil).
@@ -55,11 +55,11 @@ El proyecto utiliza una combinación de tecnologías frontend robustas para gara
 
 1.  **Clonar el repositorio:**
     ```bash
-    git clone https://github.com/davidm-afk/NUA-Wellness-Spa.git
+    git clone https://github.com/davidm-afk/SOLEA-Wellness-Spa.git
     ```
 2.  **Acceder al directorio:**
     ```bash
-    cd "Spa NÜA"
+    cd "Spa SÖLEA"
     ```
 3.  **Abrir en tu navegador:**
     *   Puedes usar extensiones como **Live Server** en VS Code.
@@ -70,5 +70,5 @@ El proyecto utiliza una combinación de tecnologías frontend robustas para gara
 ## ✉️ Contacto e Información
 *   **Ubicación:** Address, Rual Pionue, Spa. Via Hn. 500
 *   **Teléfono:** (9717) 355 5850
-*   **Email:** contacto@nuawellness.com
-*   **Sitio Web:** [NÜA Wellness Spa](https://github.com/davidm-afk/NUA-Wellness-Spa)
+*   **Email:** contacto@soleawellness.com
+*   **Sitio Web:** [SÖLEA Wellness Spa](https://github.com/davidm-afk/SOLEA-Wellness-Spa)

@@ -1,5 +1,5 @@
 /**
- * NÜA Wellness Spa - Interactive Booking System with Firebase Integration
+ * SÖLEA Wellness Spa - Interactive Booking System with Firebase Integration
  * Manages appointment CRUD using Firestore and handles authentication with Firebase Auth
  */
 
@@ -8,26 +8,26 @@ document.addEventListener('DOMContentLoaded', () => {
     injectUiElements();
 
     // Cache DOM Elements for Appointments Modal
-    const modalOverlay = document.getElementById('nuaModalOverlay');
-    const modalClose = document.getElementById('nuaModalClose');
-    const floatingBtn = document.getElementById('nuaFloatingBtn');
-    const apptsListContainer = document.getElementById('nuaApptsList');
+    const modalOverlay = document.getElementById('soleaModalOverlay');
+    const modalClose = document.getElementById('soleaModalClose');
+    const floatingBtn = document.getElementById('soleaFloatingBtn');
+    const apptsListContainer = document.getElementById('soleaApptsList');
 
     // Cache DOM Elements for Auth Modal
-    const authModalOverlay = document.getElementById('nuaAuthModalOverlay');
-    const authModalClose = document.getElementById('nuaAuthModalClose');
-    const loginBtn = document.getElementById('nuaLoginBtn');
-    const logoutBtn = document.getElementById('nuaLogoutBtn');
-    const userDropdown = document.getElementById('nuaUserDropdown');
-    const userDropdownText = document.getElementById('nuaUserDropdownText');
+    const authModalOverlay = document.getElementById('soleaAuthModalOverlay');
+    const authModalClose = document.getElementById('soleaAuthModalClose');
+    const loginBtn = document.getElementById('soleaLoginBtn');
+    const logoutBtn = document.getElementById('soleaLogoutBtn');
+    const userDropdown = document.getElementById('soleaUserDropdown');
+    const userDropdownText = document.getElementById('soleaUserDropdownText');
     
-    const loginForm = document.getElementById('nuaLoginForm');
-    const registerForm = document.getElementById('nuaRegisterForm');
+    const loginForm = document.getElementById('soleaLoginForm');
+    const registerForm = document.getElementById('soleaRegisterForm');
     const switchToRegister = document.getElementById('switchToRegister');
     const switchToLogin = document.getElementById('switchToLogin');
-    const authModalTitle = document.getElementById('nuaAuthModalTitle');
+    const authModalTitle = document.getElementById('soleaAuthModalTitle');
 
-    const googleLoginBtn = document.getElementById('nuaGoogleLoginBtn');
+    const googleLoginBtn = document.getElementById('soleaGoogleLoginBtn');
 
     // Session State & Subscriptions
     let currentUser = null;
@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Bind Navbar links for "Mis Reservas"
-    document.querySelectorAll('.nav-item-nua-gold').forEach(link => {
+    document.querySelectorAll('.nav-item-solea-gold').forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             renderAppointments();
@@ -132,8 +132,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 
                 // Pre-rellenar campos de formulario y bloquearlos para evitar errores
-                const nameInput = document.querySelector('.nua-name');
-                const emailInput = document.querySelector('.nua-email');
+                const nameInput = document.querySelector('.solea-name');
+                const emailInput = document.querySelector('.solea-email');
                 if (nameInput) {
                     nameInput.value = user.displayName || '';
                     nameInput.setAttribute('readonly', 'readonly');
@@ -155,8 +155,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (userDropdown) userDropdown.style.display = 'none';
                 
                 // Limpiar y desbloquear campos de formulario
-                const nameInput = document.querySelector('.nua-name');
-                const emailInput = document.querySelector('.nua-email');
+                const nameInput = document.querySelector('.solea-name');
+                const emailInput = document.querySelector('.solea-email');
                 if (nameInput) {
                     nameInput.value = '';
                     nameInput.removeAttribute('readonly');
@@ -188,17 +188,17 @@ document.addEventListener('DOMContentLoaded', () => {
     if (loginForm && typeof auth !== 'undefined' && auth) {
         loginForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            const email = document.getElementById('nuaLoginEmail').value.trim();
-            const password = document.getElementById('nuaLoginPassword').value;
+            const email = document.getElementById('soleaLoginEmail').value.trim();
+            const password = document.getElementById('soleaLoginPassword').value;
 
             if (!email || !password) {
-                showNuaToast('Ingresa tu correo y contraseña.', 'error');
+                showSoleaToast('Ingresa tu correo y contraseña.', 'error');
                 return;
             }
 
             auth.signInWithEmailAndPassword(email, password)
                 .then(() => {
-                    showNuaToast('¡Sesión iniciada con éxito!', 'success');
+                    showSoleaToast('¡Sesión iniciada con éxito!', 'success');
                     closeAuthModal();
                     loginForm.reset();
                 })
@@ -209,7 +209,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     } else if (error.code === 'auth/invalid-email') {
                         errorMsg = 'El formato del correo es inválido.';
                     }
-                    showNuaToast(errorMsg, 'error');
+                    showSoleaToast(errorMsg, 'error');
                 });
         });
     }
@@ -218,17 +218,17 @@ document.addEventListener('DOMContentLoaded', () => {
     if (registerForm && typeof auth !== 'undefined' && auth) {
         registerForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            const name = document.getElementById('nuaRegisterName').value.trim();
-            const email = document.getElementById('nuaRegisterEmail').value.trim();
-            const password = document.getElementById('nuaRegisterPassword').value;
+            const name = document.getElementById('soleaRegisterName').value.trim();
+            const email = document.getElementById('soleaRegisterEmail').value.trim();
+            const password = document.getElementById('soleaRegisterPassword').value;
 
             if (!name || !email || !password) {
-                showNuaToast('Completa todos los campos.', 'error');
+                showSoleaToast('Completa todos los campos.', 'error');
                 return;
             }
 
             if (password.length < 6) {
-                showNuaToast('La contraseña debe tener al menos 6 caracteres.', 'error');
+                showSoleaToast('La contraseña debe tener al menos 6 caracteres.', 'error');
                 return;
             }
 
@@ -240,7 +240,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                 })
                 .then(() => {
-                    showNuaToast('¡Cuenta creada y sesión iniciada!', 'success');
+                    showSoleaToast('¡Cuenta creada y sesión iniciada!', 'success');
                     closeAuthModal();
                     registerForm.reset();
                 })
@@ -253,7 +253,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     } else if (error.code === 'auth/weak-password') {
                         errorMsg = 'La contraseña es muy débil.';
                     }
-                    showNuaToast(errorMsg, 'error');
+                    showSoleaToast(errorMsg, 'error');
                 });
         });
     }
@@ -263,12 +263,12 @@ document.addEventListener('DOMContentLoaded', () => {
         googleLoginBtn.addEventListener('click', () => {
             auth.signInWithPopup(googleProvider)
                 .then(() => {
-                    showNuaToast('¡Sesión iniciada con Google!', 'success');
+                    showSoleaToast('¡Sesión iniciada con Google!', 'success');
                     closeAuthModal();
                 })
                 .catch(error => {
                     if (error.code !== 'auth/popup-closed-by-user') {
-                        showNuaToast('Error al iniciar sesión con Google. Revisa que el proveedor esté habilitado en Firebase.', 'error');
+                        showSoleaToast('Error al iniciar sesión con Google. Revisa que el proveedor esté habilitado en Firebase.', 'error');
                     }
                 });
         });
@@ -281,10 +281,10 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             auth.signOut()
                 .then(() => {
-                    showNuaToast('Sesión cerrada con éxito.', 'success');
+                    showSoleaToast('Sesión cerrada con éxito.', 'success');
                 })
                 .catch(() => {
-                    showNuaToast('Error al cerrar sesión.', 'error');
+                    showSoleaToast('Error al cerrar sesión.', 'error');
                 });
         });
     }
@@ -293,7 +293,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     const serviceParam = urlParams.get('service');
     if (serviceParam) {
-        const selectElement = document.querySelector('.nua-service');
+        const selectElement = document.querySelector('.solea-service');
         if (selectElement) {
             const option = selectElement.querySelector(`option[value="${serviceParam}"]`);
             if (option) {
@@ -337,7 +337,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }, error => {
                 console.error("Error al cargar citas de Firestore: ", error);
                 // Si falta permisos, es muy probable que no tenga reglas Firestore adecuadas.
-                showNuaToast('Error de permisos en Base de Datos. Recuerda activar Firestore en modo prueba o configurar las reglas.', 'error');
+                showSoleaToast('Error de permisos en Base de Datos. Recuerda activar Firestore en modo prueba o configurar las reglas.', 'error');
             });
     }
 
@@ -356,30 +356,30 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 300);
     }
 
-    // Bind all forms with class 'nua-booking-form'
+    // Bind all forms with class 'solea-booking-form'
     function bindBookingForms() {
-        const forms = document.querySelectorAll('.nua-booking-form');
+        const forms = document.querySelectorAll('.solea-booking-form');
         forms.forEach(form => {
             form.addEventListener('submit', (e) => {
                 e.preventDefault();
 
                 // Validar si el usuario está autenticado. Si no, forzar login.
                 if (!currentUser) {
-                    showNuaToast('Debes iniciar sesión para agendar una cita de spa.', 'error');
+                    showSoleaToast('Debes iniciar sesión para agendar una cita de spa.', 'error');
                     openAuthModal();
                     return;
                 }
 
                 // Recuperar inputs de forma segura
-                const nameInput = form.querySelector('.nua-name');
-                const emailInput = form.querySelector('.nua-email');
-                const dateInput = form.querySelector('.nua-date');
-                const timeInput = form.querySelector('.nua-time');
-                const serviceSelect = form.querySelector('.nua-service');
+                const nameInput = form.querySelector('.solea-name');
+                const emailInput = form.querySelector('.solea-email');
+                const dateInput = form.querySelector('.solea-date');
+                const timeInput = form.querySelector('.solea-time');
+                const serviceSelect = form.querySelector('.solea-service');
 
                 // Validaciones
                 if (!nameInput || !emailInput || !dateInput || !timeInput || !serviceSelect) {
-                    showNuaToast('Error interno al procesar el formulario.', 'error');
+                    showSoleaToast('Error interno al procesar el formulario.', 'error');
                     return;
                 }
 
@@ -391,19 +391,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 const serviceValue = serviceSelect.value;
 
                 if (!name || !email || !date || !time) {
-                    showNuaToast('Por favor, completa todos los campos obligatorios.', 'error');
+                    showSoleaToast('Por favor, completa todos los campos obligatorios.', 'error');
                     return;
                 }
 
                 if (serviceValue === '' || serviceText.includes('Selecciona')) {
-                    showNuaToast('Por favor, selecciona un servicio válido.', 'error');
+                    showSoleaToast('Por favor, selecciona un servicio válido.', 'error');
                     return;
                 }
 
                 // Validación de formato de correo
                 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 if (!emailRegex.test(email)) {
-                    showNuaToast('Por favor, ingresa un correo electrónico válido.', 'error');
+                    showSoleaToast('Por favor, ingresa un correo electrónico válido.', 'error');
                     return;
                 }
 
@@ -421,7 +421,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 today.setHours(0,0,0,0);
 
                 if (selectedDate < today) {
-                    showNuaToast('No es posible agendar citas en fechas pasadas.', 'error');
+                    showSoleaToast('No es posible agendar citas en fechas pasadas.', 'error');
                     return;
                 }
 
@@ -446,14 +446,14 @@ document.addEventListener('DOMContentLoaded', () => {
                             if (timeInput) timeInput.value = '';
                             if (serviceSelect) serviceSelect.value = '';
 
-                            showNuaToast(`¡Cita agendada con éxito para ${serviceText}!`, 'success');
+                            showSoleaToast(`¡Cita agendada con éxito para ${serviceText}!`, 'success');
                         })
                         .catch(error => {
                             console.error("Error guardando cita en Firestore: ", error);
-                            showNuaToast('Error de conexión al guardar tu cita. Revisa tu consola.', 'error');
+                            showSoleaToast('Error de conexión al guardar tu cita. Revisa tu consola.', 'error');
                         });
                 } else {
-                    showNuaToast('Error de inicialización de Base de Datos. Firebase no está configurado.', 'error');
+                    showSoleaToast('Error de inicialización de Base de Datos. Firebase no está configurado.', 'error');
                 }
             });
         });
@@ -473,11 +473,11 @@ document.addEventListener('DOMContentLoaded', () => {
                         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
                         if (!email || !emailRegex.test(email)) {
-                            showNuaToast('Por favor, ingresa un correo de suscripción válido.', 'error');
+                            showSoleaToast('Por favor, ingresa un correo de suscripción válido.', 'error');
                             return;
                         }
 
-                        showNuaToast('¡Te has suscrito con éxito a nuestro boletín de lujo!', 'success');
+                        showSoleaToast('¡Te has suscrito con éxito a nuestro boletín de lujo!', 'success');
                         input.value = '';
                     });
                 }
@@ -491,13 +491,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (!currentUser) {
             apptsListContainer.innerHTML = `
-                <div class="nua-no-appointments">
-                    <div class="nua-no-appointments-icon"><i class="fas fa-user-lock"></i></div>
+                <div class="solea-no-appointments">
+                    <div class="solea-no-appointments-icon"><i class="fas fa-user-lock"></i></div>
                     <p style="color: rgba(255, 255, 255, 0.6); margin-bottom: 0;">Inicia sesión para gestionar y revisar tus citas.</p>
-                    <button class="btn btn-primary btn-sm mt-3" id="nuaModalLoginBtn" style="border-radius: 50px; padding: 6px 20px;">Iniciar Sesión</button>
+                    <button class="btn btn-primary btn-sm mt-3" id="soleaModalLoginBtn" style="border-radius: 50px; padding: 6px 20px;">Iniciar Sesión</button>
                 </div>
             `;
-            const modalLoginBtn = document.getElementById('nuaModalLoginBtn');
+            const modalLoginBtn = document.getElementById('soleaModalLoginBtn');
             if (modalLoginBtn) {
                 modalLoginBtn.addEventListener('click', () => {
                     closeModal();
@@ -509,8 +509,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (appts.length === 0) {
             apptsListContainer.innerHTML = `
-                <div class="nua-no-appointments">
-                    <div class="nua-no-appointments-icon"><i class="fas fa-calendar-minus"></i></div>
+                <div class="solea-no-appointments">
+                    <div class="solea-no-appointments-icon"><i class="fas fa-calendar-minus"></i></div>
                     <p style="color: rgba(255, 255, 255, 0.6); margin-bottom: 0;">No tienes citas agendadas por el momento.</p>
                     <p style="font-size: 0.8rem; color: rgba(197, 168, 128, 0.5); margin-top: 5px;">¡Agenda tu primera experiencia sensorial hoy!</p>
                 </div>
@@ -523,21 +523,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
         appts.forEach(appt => {
             const card = document.createElement('div');
-            card.className = 'nua-appointment-card';
+            card.className = 'solea-appointment-card';
             card.innerHTML = `
-                <div class="nua-appt-info">
-                    <div class="nua-appt-service">${escapeHtml(appt.service)}</div>
-                    <div class="nua-appt-detail">
+                <div class="solea-appt-info">
+                    <div class="solea-appt-service">${escapeHtml(appt.service)}</div>
+                    <div class="solea-appt-detail">
                         <span><i class="far fa-calendar-alt"></i> ${escapeHtml(appt.date)}</span>
                         <span><i class="far fa-clock"></i> ${escapeHtml(appt.time)}</span>
                     </div>
-                    <div class="nua-appt-client">Titular: ${escapeHtml(appt.name)} (${escapeHtml(appt.email)})</div>
+                    <div class="solea-appt-client">Titular: ${escapeHtml(appt.name)} (${escapeHtml(appt.email)})</div>
                 </div>
-                <button class="nua-appt-cancel-btn" data-id="${appt.id}">Cancelar</button>
+                <button class="solea-appt-cancel-btn" data-id="${appt.id}">Cancelar</button>
             `;
 
             // Enlazar botón de cancelar
-            card.querySelector('.nua-appt-cancel-btn').addEventListener('click', () => {
+            card.querySelector('.solea-appt-cancel-btn').addEventListener('click', () => {
                 cancelAppointment(appt.id, appt.service);
             });
 
@@ -552,11 +552,11 @@ document.addEventListener('DOMContentLoaded', () => {
             if (typeof db !== 'undefined' && db) {
                 db.collection('appointments').doc(id).delete()
                     .then(() => {
-                        showNuaToast('Cita cancelada con éxito.', 'success');
+                        showSoleaToast('Cita cancelada con éxito.', 'success');
                     })
                     .catch(error => {
                         console.error("Error al cancelar cita en Firestore: ", error);
-                        showNuaToast('Error al cancelar la cita.', 'error');
+                        showSoleaToast('Error al cancelar la cita.', 'error');
                     });
             }
         }
@@ -565,14 +565,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // Update floating badge and navbar indicator count
     function updateBadges(count = 0) {
         // Floating badge count
-        const badge = document.getElementById('nuaFloatingBadge');
+        const badge = document.getElementById('soleaFloatingBadge');
         if (badge) {
             badge.textContent = count;
             badge.style.display = count > 0 ? 'flex' : 'none';
         }
 
         // Nav badge count
-        const navBadges = document.querySelectorAll('.nav-item-nua-gold span.badge');
+        const navBadges = document.querySelectorAll('.nav-item-solea-gold span.badge');
         navBadges.forEach(nb => {
             nb.textContent = count;
             nb.style.display = count > 0 ? 'inline-block' : 'none';
@@ -582,27 +582,27 @@ document.addEventListener('DOMContentLoaded', () => {
     // Dynamic Elements Injection
     function injectUiElements() {
         // 1. Toast Container
-        if (!document.getElementById('nuaToastContainer')) {
+        if (!document.getElementById('soleaToastContainer')) {
             const toastContainer = document.createElement('div');
-            toastContainer.id = 'nuaToastContainer';
-            toastContainer.className = 'nua-toast-container';
+            toastContainer.id = 'soleaToastContainer';
+            toastContainer.className = 'solea-toast-container';
             document.body.appendChild(toastContainer);
         }
 
         // 2. Appointments Modal Overlay
-        if (!document.getElementById('nuaModalOverlay')) {
+        if (!document.getElementById('soleaModalOverlay')) {
             const modalOverlay = document.createElement('div');
-            modalOverlay.id = 'nuaModalOverlay';
-            modalOverlay.className = 'nua-modal-overlay';
+            modalOverlay.id = 'soleaModalOverlay';
+            modalOverlay.className = 'solea-modal-overlay';
             modalOverlay.innerHTML = `
-                <div class="nua-modal">
-                    <div class="nua-modal-header">
-                        <h4 class="nua-modal-title">Gestión de Citas</h4>
-                        <button class="nua-modal-close" id="nuaModalClose">&times;</button>
+                <div class="solea-modal">
+                    <div class="solea-modal-header">
+                        <h4 class="solea-modal-title">Gestión de Citas</h4>
+                        <button class="solea-modal-close" id="soleaModalClose">&times;</button>
                     </div>
-                    <div class="nua-modal-body">
+                    <div class="solea-modal-body">
                         <h5 class="text-white mb-4" style="font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: #c5a880;">Mis Reservas Programadas</h5>
-                        <div class="nua-appointments-list" id="nuaApptsList">
+                        <div class="solea-appointments-list" id="soleaApptsList">
                             <!-- Dynamically Rendered -->
                         </div>
                     </div>
@@ -612,40 +612,40 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // 3. Floating Button
-        if (!document.getElementById('nuaFloatingBtn')) {
+        if (!document.getElementById('soleaFloatingBtn')) {
             const floatingBtn = document.createElement('button');
-            floatingBtn.id = 'nuaFloatingBtn';
-            floatingBtn.className = 'nua-floating-btn';
+            floatingBtn.id = 'soleaFloatingBtn';
+            floatingBtn.className = 'solea-floating-btn';
             floatingBtn.setAttribute('title', 'Ver Mis Reservas');
             floatingBtn.innerHTML = `
                 <i class="far fa-calendar-check"></i>
-                <span class="nua-floating-badge" id="nuaFloatingBadge" style="display: none;">0</span>
+                <span class="solea-floating-badge" id="soleaFloatingBadge" style="display: none;">0</span>
             `;
             document.body.appendChild(floatingBtn);
         }
 
         // 4. Elegant Authentication Modal Overlay
-        if (!document.getElementById('nuaAuthModalOverlay')) {
+        if (!document.getElementById('soleaAuthModalOverlay')) {
             const authModalOverlay = document.createElement('div');
-            authModalOverlay.id = 'nuaAuthModalOverlay';
-            authModalOverlay.className = 'nua-modal-overlay';
+            authModalOverlay.id = 'soleaAuthModalOverlay';
+            authModalOverlay.className = 'solea-modal-overlay';
             authModalOverlay.innerHTML = `
-                <div class="nua-modal nua-auth-modal">
-                    <div class="nua-modal-header">
-                        <h4 class="nua-modal-title" id="nuaAuthModalTitle">Iniciar Sesión</h4>
-                        <button class="nua-modal-close" id="nuaAuthModalClose">&times;</button>
+                <div class="solea-modal solea-auth-modal">
+                    <div class="solea-modal-header">
+                        <h4 class="solea-modal-title" id="soleaAuthModalTitle">Iniciar Sesión</h4>
+                        <button class="solea-modal-close" id="soleaAuthModalClose">&times;</button>
                     </div>
-                    <div class="nua-modal-body">
+                    <div class="solea-modal-body">
                         <!-- Formulario de Inicio de Sesión -->
-                        <form id="nuaLoginForm" class="nua-auth-form">
+                        <form id="soleaLoginForm" class="solea-auth-form">
                             <p class="text-white-50 text-center mb-4" style="font-size: 0.9rem; font-weight: 300;">Inicia sesión para gestionar y agendar tus experiencias sensoriales.</p>
                             <div class="form-group mb-3">
                                 <label class="text-white-50" style="font-size: 0.85rem;">Correo Electrónico</label>
-                                <input type="email" id="nuaLoginEmail" class="form-control bg-transparent text-white" placeholder="ejemplo@correo.com" required style="border: 1px solid rgba(197, 168, 128, 0.25); color: #fff;">
+                                <input type="email" id="soleaLoginEmail" class="form-control bg-transparent text-white" placeholder="ejemplo@correo.com" required style="border: 1px solid rgba(197, 168, 128, 0.25); color: #fff;">
                             </div>
                             <div class="form-group mb-4">
                                 <label class="text-white-50" style="font-size: 0.85rem;">Contraseña</label>
-                                <input type="password" id="nuaLoginPassword" class="form-control bg-transparent text-white" placeholder="Mínimo 6 caracteres" required style="border: 1px solid rgba(197, 168, 128, 0.25); color: #fff;">
+                                <input type="password" id="soleaLoginPassword" class="form-control bg-transparent text-white" placeholder="Mínimo 6 caracteres" required style="border: 1px solid rgba(197, 168, 128, 0.25); color: #fff;">
                             </div>
                             <button type="submit" class="btn btn-primary btn-block mb-3" style="height: 45px; font-size: 0.9rem; letter-spacing: 1px;">Ingresar</button>
                             <p class="text-center text-white-50" style="font-size: 0.85rem;">
@@ -654,19 +654,19 @@ document.addEventListener('DOMContentLoaded', () => {
                         </form>
 
                         <!-- Formulario de Registro (Oculto por defecto) -->
-                        <form id="nuaRegisterForm" class="nua-auth-form" style="display: none;">
-                            <p class="text-white-50 text-center mb-4" style="font-size: 0.9rem; font-weight: 300;">Crea tu cuenta exclusiva de cliente NÜA Wellness Spa.</p>
+                        <form id="soleaRegisterForm" class="solea-auth-form" style="display: none;">
+                            <p class="text-white-50 text-center mb-4" style="font-size: 0.9rem; font-weight: 300;">Crea tu cuenta exclusiva de cliente SÖLEA Wellness Spa.</p>
                             <div class="form-group mb-3">
                                 <label class="text-white-50" style="font-size: 0.85rem;">Nombre Completo</label>
-                                <input type="text" id="nuaRegisterName" class="form-control bg-transparent text-white" placeholder="Tu Nombre Completo" required style="border: 1px solid rgba(197, 168, 128, 0.25); color: #fff;">
+                                <input type="text" id="soleaRegisterName" class="form-control bg-transparent text-white" placeholder="Tu Nombre Completo" required style="border: 1px solid rgba(197, 168, 128, 0.25); color: #fff;">
                             </div>
                             <div class="form-group mb-3">
                                 <label class="text-white-50" style="font-size: 0.85rem;">Correo Electrónico</label>
-                                <input type="email" id="nuaRegisterEmail" class="form-control bg-transparent text-white" placeholder="ejemplo@correo.com" required style="border: 1px solid rgba(197, 168, 128, 0.25); color: #fff;">
+                                <input type="email" id="soleaRegisterEmail" class="form-control bg-transparent text-white" placeholder="ejemplo@correo.com" required style="border: 1px solid rgba(197, 168, 128, 0.25); color: #fff;">
                             </div>
                             <div class="form-group mb-4">
                                 <label class="text-white-50" style="font-size: 0.85rem;">Contraseña</label>
-                                <input type="password" id="nuaRegisterPassword" class="form-control bg-transparent text-white" placeholder="Mínimo 6 caracteres" required style="border: 1px solid rgba(197, 168, 128, 0.25); color: #fff;">
+                                <input type="password" id="soleaRegisterPassword" class="form-control bg-transparent text-white" placeholder="Mínimo 6 caracteres" required style="border: 1px solid rgba(197, 168, 128, 0.25); color: #fff;">
                             </div>
                             <button type="submit" class="btn btn-primary btn-block mb-3" style="height: 45px; font-size: 0.9rem; letter-spacing: 1px;">Registrarse</button>
                             <p class="text-center text-white-50" style="font-size: 0.85rem;">
@@ -675,12 +675,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         </form>
 
                         <!-- Proveedor Social (Google) -->
-                        <div class="nua-social-divider my-4">
+                        <div class="solea-social-divider my-4">
                             <span class="text-white-50" style="font-size: 0.8rem; background: #0a0a0a; padding: 0 10px; font-family: 'Poppins', sans-serif; letter-spacing: 1px;">O INGRESA CON</span>
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <button type="button" id="nuaGoogleLoginBtn" class="btn btn-outline-light btn-block d-flex align-items-center justify-content-center" style="border-color: rgba(255,255,255,0.15); height: 45px; color: #fff; font-size: 0.85rem; font-weight: 500;">
+                                <button type="button" id="soleaGoogleLoginBtn" class="btn btn-outline-light btn-block d-flex align-items-center justify-content-center" style="border-color: rgba(255,255,255,0.15); height: 45px; color: #fff; font-size: 0.85rem; font-weight: 500;">
                                     <i class="fab fa-google mr-2" style="color: #ea4335;"></i> Google
                                 </button>
                             </div>
@@ -693,12 +693,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Toast Generator helper
-    window.showNuaToast = function(message, type = 'success') {
-        const container = document.getElementById('nuaToastContainer');
+    window.showSoleaToast = function(message, type = 'success') {
+        const container = document.getElementById('soleaToastContainer');
         if (!container) return;
 
         const toast = document.createElement('div');
-        toast.className = 'nua-toast';
+        toast.className = 'solea-toast';
 
         const iconClass = type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle';
         const iconStyle = type === 'success' ? '' : 'style="color: #dc3545;"';
@@ -708,15 +708,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         toast.innerHTML = `
-            <div class="nua-toast-content">
-                <i class="fas ${iconClass} nua-toast-icon" ${iconStyle}></i>
+            <div class="solea-toast-content">
+                <i class="fas ${iconClass} solea-toast-icon" ${iconStyle}></i>
                 <span>${escapeHtml(message)}</span>
             </div>
-            <button class="nua-toast-close">&times;</button>
+            <button class="solea-toast-close">&times;</button>
         `;
 
         // Bind dismiss button
-        toast.querySelector('.nua-toast-close').addEventListener('click', () => {
+        toast.querySelector('.solea-toast-close').addEventListener('click', () => {
             dismissToast(toast);
         });
 

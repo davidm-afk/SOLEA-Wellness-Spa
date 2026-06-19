@@ -1,4 +1,4 @@
-// Configuración de Firebase para NÜA Wellness Spa
+// Configuración de Firebase para SÖLEA Wellness Spa
 // Reemplaza los siguientes valores con las credenciales de tu proyecto de Firebase
 
 const firebaseConfig = {

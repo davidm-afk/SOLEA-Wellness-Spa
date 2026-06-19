@@ -25,8 +25,8 @@ $(function () {
                 },
                 cache: false,
                 success: function () {
-                    if (window.showNuaToast) {
-                        window.showNuaToast("¡Mensaje enviado con éxito! Gracias por escribirnos.", "success");
+                    if (window.showSoleaToast) {
+                        window.showSoleaToast("¡Mensaje enviado con éxito! Gracias por escribirnos.", "success");
                     } else {
                         $('#success').html("<div class='alert alert-success'>");
                         $('#success > .alert-success').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
@@ -40,7 +40,7 @@ $(function () {
                 },
                 error: function () {
                     // Graceful Local Fallback for Static Hostings
-                    const backupMessages = localStorage.getItem('nua_messages') ? JSON.parse(localStorage.getItem('nua_messages')) : [];
+                    const backupMessages = localStorage.getItem('solea_messages') ? JSON.parse(localStorage.getItem('solea_messages')) : [];
                     backupMessages.push({
                         id: 'msg_' + Date.now(),
                         name: name,
@@ -49,10 +49,10 @@ $(function () {
                         message: message,
                         createdAt: new Date().toISOString()
                     });
-                    localStorage.setItem('nua_messages', JSON.stringify(backupMessages));
+                    localStorage.setItem('solea_messages', JSON.stringify(backupMessages));
 
-                    if (window.showNuaToast) {
-                        window.showNuaToast("¡Mensaje enviado con éxito (Simulación Local)! Responderemos pronto.", "success");
+                    if (window.showSoleaToast) {
+                        window.showSoleaToast("¡Mensaje enviado con éxito (Simulación Local)! Responderemos pronto.", "success");
                     } else {
                         $('#success').html("<div class='alert alert-success'>");
                         $('#success > .alert-success').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
